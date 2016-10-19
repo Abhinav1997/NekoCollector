@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2016 The Android Open Source Project
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<resources>
+    <string name="app_name" translatable="false">Neko Collector</string>
+    <string name="notification_name" translatable="false">Android Neko</string>
+    <string name="notification_title" translatable="false">A cat is here.</string>
+    <string name="default_cat_name" translatable="false">Cat #%s</string>
+    <string name="directory_name" translatable="false">Cats</string>
+    <string name="empty_dish" translatable="false">Empty dish</string>
+    <string name="instructions">Instructions</string>
+    <string name="about">About</string>
+    <string name="about_text">This is based on Android Nougat\'s Easter Egg and made available for older android versions.</string>
+    <string name="instructions_text">The game is simple. Click on the empty dish to select a food. Now wait for a cat to smell the food and come to you. Collect as many unique cats as you can!</string>
+    <string name="credits">Credits : Android Open Source Project by Google</string>
+    <string-array name="food_names" translatable="false">
+        <item>Empty dish</item>
+        <item>Bits</item>
+        <item>Fish</item>
+        <item>Chicken</item>
+        <item>Treat</item>
+    </string-array>
+    <array name="food_icons">
+        <item>@drawable/food_dish</item>
+        <item>@drawable/food_bits</item>
+        <item>@drawable/food_sysuituna</item>
+        <item>@drawable/food_chicken</item>
+        <item>@drawable/food_donut</item>
+    </array>
+    <integer-array name="food_intervals">
+        <item>0</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>120</item>
+    </integer-array>
+    <integer-array name="food_new_cat_prob">
+        <item>0</item>
+        <item>5</item>
+        <item>35</item>
+        <item>65</item>
+        <item>90</item>
+    </integer-array>
+</resources>
