@@ -1,12 +1,16 @@
 package com.abhinavjhanwar.android.egg.neko;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -21,20 +25,41 @@ public class AboutActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about_activity);
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         final ImageView imageView = (ImageView) findViewById(R.id.aboutCat);
         final ImageView githubImage = (ImageView) findViewById(R.id.githubIcon);
         final ImageView twitterImage = (ImageView) findViewById(R.id.twitterIcon);
         final ImageView gPlusImage = (ImageView) findViewById(R.id.gPlusIcon);
         final ImageView facebookImage = (ImageView) findViewById(R.id.facebookIcon);
-        Cat cat = Cat.create(this);
-        Drawable catIcon = new BitmapDrawable(getResources(), cat.createLargeIcon(this));
-        imageView.setImageDrawable(catIcon);
+        final Cat[] cat = {Cat.create(this)};
+        final Drawable[] catIcon = {new BitmapDrawable(getResources(), cat[0].createLargeIcon(this))};
+        imageView.setImageDrawable(catIcon[0]);
+        imageView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                    long[] pattern = {0, 1000, 0};
+                    Toast toast = Toast.makeText(getApplicationContext(), getCatEmoji(), Toast.LENGTH_SHORT);
+                    View toastView = toast.getView();
+                    toastView.setBackgroundColor(0x00000000);
+                    vb.vibrate(pattern, 0);
+                    toast.show();
+                    vb.cancel();
+                }
+                return true;
+            }
+        });
+
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Toast.makeText(getApplicationContext(), getCatEmoji(), Toast.LENGTH_SHORT).show();
-                }
+            public void onClick(View view) {
+                cat[0] = Cat.create(getApplicationContext());
+                catIcon[0] = new BitmapDrawable(getResources(), cat[0].createLargeIcon(getApplicationContext()));
+                imageView.setImageDrawable(catIcon[0]);
             }
         });
 
@@ -65,6 +90,17 @@ public class AboutActivity extends Activity {
                 openLink("https://www.facebook.com/AbhinavJhanwar97");
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public String getCatEmoji() {

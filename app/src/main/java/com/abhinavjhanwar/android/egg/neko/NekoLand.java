@@ -30,6 +30,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -41,6 +42,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -311,7 +314,7 @@ public class NekoLand extends Activity implements PrefState.PrefsListener {
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+                                           @NonNull String permissions[], @NonNull int[] grantResults) {
         if (requestCode == STORAGE_PERM_REQUEST) {
             if (mPendingShareCat != null) {
                 shareCat(mPendingShareCat);
@@ -323,9 +326,36 @@ public class NekoLand extends Activity implements PrefState.PrefsListener {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        if (mPrefs.getCatReturns() && !mPrefs.getDoNotShow()) {
+            getReturnDialog(this);
+        }
         textView.setText(getResources().getString(R.string.empty_dish));
         imageView.setImageResource(R.drawable.food_dish);
 
+    }
+
+    public void getReturnDialog(Context context) {
+        View checkBoxView = View.inflate(this, R.layout.checkbox, null);
+        CheckBox checkBox = (CheckBox) checkBoxView.findViewById(R.id.skip_dialog);
+        float dpi = context.getResources().getDisplayMetrics().density;
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    mPrefs.setDoNotShow(true);
+                } else {
+                    mPrefs.setDoNotShow(false);
+                }
+            }
+        });
+        AlertDialog dialog = new AlertDialog.Builder(context)
+                .setTitle("A cat has returned")
+                .setMessage("Looks like an old cat has returned. Try different food for getting unique cats.")
+                .setPositiveButton("OK", null)
+                .create();
+        dialog.setView(checkBoxView, (int)(19*dpi), (int)(5*dpi), (int)(14*dpi), (int)(5*dpi));
+        dialog.show();
     }
 
     private static class CatHolder extends RecyclerView.ViewHolder {

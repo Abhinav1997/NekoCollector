@@ -25,7 +25,8 @@ Copyright (C) 2016 The Android Open Source Project
     <string name="about">About</string>
     <string name="about_text">This is based on Android Nougat\'s Easter Egg and made available for older android versions.</string>
     <string name="instructions_text">The game is simple. Click on the empty dish to select a food. Now wait for a cat to smell the food and come to you. Collect as many unique cats as you can!</string>
-    <string name="credits">Credits : Android Open Source Project by Google</string>
+    <string name="credits">Credits: Android Open Source Project by Google</string>
+    <string name="not_again">Don\'t show this again.</string>
     <string-array name="food_names" translatable="false">
         <item>Empty dish</item>
         <item>Bits</item>

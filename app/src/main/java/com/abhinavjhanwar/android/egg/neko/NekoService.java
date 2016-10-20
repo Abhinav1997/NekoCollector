@@ -91,10 +91,12 @@ public class NekoService extends JobService {
                     cat = Cat.create(this);
                     prefs.addCat(cat);
                     notificationText = "A new cat is here.";
+                    prefs.setCatReturns(false);
                     Log.v(TAG, "A new cat is here: " + cat.getName());
                 } else {
                     cat = cats.get(rng.nextInt(cats.size()));
                     notificationText = "A cat has returned.";
+                    prefs.setCatReturns(true);
                     Log.v(TAG, "A cat has returned: " + cat.getName());
                 }
 
@@ -149,7 +151,7 @@ public class NekoService extends JobService {
     }
 
     public static void cancelJob(Context context) {
-        JobScheduler jss = null;
+        JobScheduler jss;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             jss = context.getSystemService(JobScheduler.class);
         } else {

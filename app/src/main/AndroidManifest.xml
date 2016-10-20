@@ -15,9 +15,7 @@ Copyright (C) 2016 The Android Open Source Project
     limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.abhinavjhanwar.android.egg"
-          android:versionCode="1"
-          android:versionName="1.0">
+          package="com.abhinavjhanwar.android.egg">
 
     <uses-permission android:name="android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
