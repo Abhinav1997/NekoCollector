@@ -67,7 +67,7 @@ public class NekoLand extends Activity implements PrefState.PrefsListener {
     private CatAdapter mAdapter;
     private Cat mPendingShareCat;
     public static ImageView imageView;
-    public static TextView textView;
+    public static TextView textView, closeAppTextView;
 
 
     @Override
@@ -84,6 +84,7 @@ public class NekoLand extends Activity implements PrefState.PrefsListener {
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.holder);
         imageView = (ImageView) findViewById(R.id.food_icon);
         textView = (TextView) findViewById(R.id.food);
+        closeAppTextView = (TextView) findViewById(R.id.close_app);
         recyclerView.setNestedScrollingEnabled(false);
         final NekoDialog nekoDialog = new NekoDialog(this);
         final int[] foodState = {mPrefs.getFoodState()};
@@ -101,6 +102,7 @@ public class NekoLand extends Activity implements PrefState.PrefsListener {
                     mPrefs.setFoodState(0);
                     textView.setText(getResources().getString(R.string.empty_dish));
                     imageView.setImageResource(R.drawable.food_dish);
+                    closeAppTextView.setVisibility(View.GONE);
                 }
             }
         });
@@ -150,6 +152,7 @@ public class NekoLand extends Activity implements PrefState.PrefsListener {
         if (mPrefs.getFoodState() == 0) {
             textView.setText(getResources().getString(R.string.empty_dish));
             imageView.setImageResource(R.drawable.food_dish);
+            closeAppTextView.setVisibility(View.GONE);
         }
     }
 
@@ -331,7 +334,7 @@ public class NekoLand extends Activity implements PrefState.PrefsListener {
         }
         textView.setText(getResources().getString(R.string.empty_dish));
         imageView.setImageResource(R.drawable.food_dish);
-
+        closeAppTextView.setVisibility(View.GONE);
     }
 
     public void getReturnDialog(Context context) {

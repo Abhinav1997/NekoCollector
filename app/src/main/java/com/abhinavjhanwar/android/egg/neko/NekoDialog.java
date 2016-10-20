@@ -59,6 +59,7 @@ public class NekoDialog extends Dialog {
         prefs.setFoodState(food.getType());
         NekoLand.imageView.setImageResource(food.getIcon(getContext()));
         NekoLand.textView.setText(food.getName(getContext()));
+        NekoLand.closeAppTextView.setVisibility(View.VISIBLE);
         dismiss();
     }
 
