@@ -47,8 +47,6 @@ public class NekoService extends JobService {
     public static long SECONDS = 1000;
     public static long MINUTES = 60 * SECONDS;
 
-    public static long INTERVAL_FLEX = 5 * MINUTES;
-
     public static float INTERVAL_JITTER_FRAC = 0.25f;
 
     public static String notificationText = "A cat is here.";
@@ -57,7 +55,7 @@ public class NekoService extends JobService {
     public boolean onStartJob(JobParameters params) {
         Log.v(TAG, "Starting job: " + String.valueOf(params));
 
-        NotificationManager noman = null;
+        NotificationManager noman;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             noman = getSystemService(NotificationManager.class);
         } else {
@@ -66,8 +64,6 @@ public class NekoService extends JobService {
         if (NekoLand.DEBUG_NOTIFICATIONS) {
             final Bundle extras = new Bundle();
             extras.putString("android.substName", getString(R.string.notification_name));
-            final int size = getResources()
-                    .getDimensionPixelSize(android.R.dimen.notification_large_icon_width);
             final Cat cat = Cat.create(this);
             final Notification.Builder builder
                     = cat.buildNotification(this)
@@ -133,7 +129,7 @@ public class NekoService extends JobService {
         jss.schedule(jobInfo);
 
         if (NekoLand.DEBUG_NOTIFICATIONS) {
-            NotificationManager noman = null;
+            NotificationManager noman;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                 noman = context.getSystemService(NotificationManager.class);
             } else {

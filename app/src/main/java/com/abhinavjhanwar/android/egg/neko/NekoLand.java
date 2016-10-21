@@ -15,7 +15,6 @@
 package com.abhinavjhanwar.android.egg.neko;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -31,8 +30,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -55,7 +56,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class NekoLand extends Activity implements PrefState.PrefsListener {
+public class NekoLand extends AppCompatActivity implements PrefState.PrefsListener {
     public static boolean DEBUG_NOTIFICATIONS = false;
 
     private static final int STORAGE_PERM_REQUEST = 123;
@@ -75,10 +76,16 @@ public class NekoLand extends Activity implements PrefState.PrefsListener {
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             DIALOG_THEME = android.R.style.Theme_Material_Dialog_NoActionBar;
-        } else {
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             DIALOG_THEME = android.R.style.Theme_Holo_Dialog_NoActionBar;
+        } else {
+            DIALOG_THEME = android.R.style.Theme_Dialog;
         }
         setContentView(R.layout.neko_activity);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         mPrefs = new PrefState(this);
         mPrefs.setListener(this);
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.holder);
@@ -174,13 +181,16 @@ public class NekoLand extends Activity implements PrefState.PrefsListener {
     }
 
     private void showNameDialog(final Cat cat) {
-        Context context = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+        Context context;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             context = new ContextThemeWrapper(this,
                     android.R.style.Theme_Material_Light_Dialog_NoActionBar);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                context = new ContextThemeWrapper(this,
+                        android.R.style.Theme_Holo_Dialog_NoActionBar);
         } else {
             context = new ContextThemeWrapper(this,
-                    android.R.style.Theme_Holo_Dialog_NoActionBar);
+                    android.R.style.Theme_Dialog);
         }
         // TODO: Move to XML, add correct margins.
         final ViewGroup nullParent = null;
@@ -188,7 +198,12 @@ public class NekoLand extends Activity implements PrefState.PrefsListener {
         final EditText text = (EditText) view.findViewById(android.R.id.edit);
         text.setText(cat.getName());
         text.setSelection(cat.getName().length());
-        Drawable catIcon = new BitmapDrawable(getResources(), cat.createLargeIcon(this));
+        Drawable catIcon;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            catIcon = cat.createLargeIcon(this).loadDrawable(this);
+        } else {
+            catIcon = new BitmapDrawable(getResources(), cat.createLargeBitmap(this));
+        }
         //Drawable catIcon = cat.createLargeIcon(this).loadDrawable(this);
         new AlertDialog.Builder(context)
                 .setTitle(" ")
@@ -226,7 +241,11 @@ public class NekoLand extends Activity implements PrefState.PrefsListener {
         @Override
         public void onBindViewHolder(final CatHolder holder, int position) {
             Context context = holder.itemView.getContext();
-            holder.imageView.setImageBitmap(mCats[position].createLargeIcon(context));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                holder.imageView.setImageIcon(mCats[position].createLargeIcon(context));
+            } else {
+                holder.imageView.setImageBitmap(mCats[position].createLargeBitmap(context));
+            }
             holder.textView.setText(mCats[position].getName());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

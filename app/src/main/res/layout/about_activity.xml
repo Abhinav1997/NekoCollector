@@ -8,15 +8,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <include android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
         <TextView
             android:id="@+id/aboutTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textAllCaps="true"
-            android:text="@string/about"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="@string/about_caps"
+            android:layout_marginTop="72dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 

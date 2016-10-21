@@ -32,12 +32,10 @@ import java.util.ArrayList;
 
 public class NekoDialog extends Dialog {
 
-    private final Adapter mAdapter;
-
     public NekoDialog(@NonNull Context context) {
         super(context, NekoLand.DIALOG_THEME);
         RecyclerView view = new RecyclerView(getContext());
-        mAdapter = new Adapter(getContext());
+        Adapter mAdapter = new Adapter(getContext());
         view.setLayoutManager(new GridLayoutManager(getContext(), 2));
         view.setAdapter(mAdapter);
         final float dp = context.getResources().getDisplayMetrics().density;

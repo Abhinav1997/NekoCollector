@@ -29,6 +29,9 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 
 import com.abhinavjhanwar.android.egg.R;
@@ -227,12 +230,28 @@ public class Cat extends Drawable {
                 .setVibrate(PURR);
     }
 
+    public NotificationCompat.Builder buildNotificationbelowM(Context context) {
+        final Bundle extras = new Bundle();
+        extras.putString("android.substName", context.getString(R.string.notification_name));
+        final Intent intent = new Intent(Intent.ACTION_MAIN)
+                .setClass(context, NekoLand.class)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return new NotificationCompat.Builder(context)
+                .setSmallIcon(R.drawable.stat_icon)
+                .setContentTitle(OldService.notificationText)
+                .setContentText(getName())
+                .setContentIntent(PendingIntent.getActivity(context, 0, intent, 0))
+                .setAutoCancel(true)
+                .setVibrate(PURR);
+    }
+
+
     public long getSeed() {
         return mSeed;
     }
 
     @Override
-    public void draw(Canvas canvas) {
+    public void draw(@NonNull Canvas canvas) {
         final int w = Math.min(canvas.getWidth(), canvas.getHeight());
         final int h = w;
 
@@ -264,7 +283,7 @@ public class Cat extends Drawable {
         return result;
     }
 
-    public Bitmap createLargeIcon(Context context) {
+    public Bitmap createLargeBitmap(Context context) {
         final Resources res = context.getResources();
         final int w = res.getDimensionPixelSize(android.R.dimen.notification_large_icon_width);
         final int h = res.getDimensionPixelSize(android.R.dimen.notification_large_icon_height);
@@ -285,6 +304,28 @@ public class Cat extends Drawable {
         slowDraw(canvas, m, m, w-m-m, h-m-m);
 
         return result;
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public Icon createLargeIcon(Context context) {
+        final Resources res = context.getResources();
+        final int w = res.getDimensionPixelSize(android.R.dimen.notification_large_icon_width);
+        final int h = res.getDimensionPixelSize(android.R.dimen.notification_large_icon_height);
+        Bitmap result = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        final Canvas canvas = new Canvas(result);
+        final Paint pt = new Paint();
+        float[] hsv = new float[3];
+        Color.colorToHSV(mBodyColor, hsv);
+        hsv[2] = (hsv[2]>0.5f)
+                ? (hsv[2] - 0.25f)
+                : (hsv[2] + 0.25f);
+        pt.setColor(Color.HSVToColor(hsv));
+        float r = w/2;
+        canvas.drawCircle(r, r, r, pt);
+        int m = w/10;
+        slowDraw(canvas, m, m, w-m-m, h-m-m);
+        return Icon.createWithBitmap(result);
     }
 
     @Override

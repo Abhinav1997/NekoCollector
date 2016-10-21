@@ -1,6 +1,5 @@
 package com.abhinavjhanwar.android.egg.neko;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
@@ -8,6 +7,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.abhinavjhanwar.android.egg.R;
@@ -19,16 +19,12 @@ public class OldService extends Service {
 
     private static final String TAG = "NekoService";
 
-    public static int JOB_ID = 43;
-
     public static int CAT_NOTIFICATION = 1;
 
     public static float CAT_CAPTURE_PROB = 1.0f; // generous
 
     public static long SECONDS = 1000;
     public static long MINUTES = 60 * SECONDS;
-
-    public static long INTERVAL_FLEX = 5 * MINUTES;
 
     public static float INTERVAL_JITTER_FRAC = 0.25f;
 
@@ -61,7 +57,7 @@ public class OldService extends Service {
                     Log.v(TAG, "A cat has returned: " + cat.getName());
                 }
 
-                final Notification.Builder builder = cat.buildNotification(this);
+                final NotificationCompat.Builder builder = cat.buildNotificationbelowM(this);
                 Log.v(TAG, "Creating notification");
                 noman.notify(CAT_NOTIFICATION, builder.build());
             }

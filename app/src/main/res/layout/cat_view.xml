@@ -78,4 +78,3 @@
         android:textAppearance="?android:attr/textAppearanceListItem"
         android:gravity="center"/>
 </LinearLayout>
-

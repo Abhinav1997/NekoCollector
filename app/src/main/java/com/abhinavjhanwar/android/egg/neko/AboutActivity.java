@@ -1,7 +1,5 @@
 package com.abhinavjhanwar.android.egg.neko;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
@@ -10,6 +8,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,24 +19,31 @@ import com.abhinavjhanwar.android.egg.R;
 
 import java.util.Random;
 
-public class AboutActivity extends Activity {
+public class AboutActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about_activity);
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
         final ImageView imageView = (ImageView) findViewById(R.id.aboutCat);
         final ImageView githubImage = (ImageView) findViewById(R.id.githubIcon);
         final ImageView twitterImage = (ImageView) findViewById(R.id.twitterIcon);
         final ImageView gPlusImage = (ImageView) findViewById(R.id.gPlusIcon);
         final ImageView facebookImage = (ImageView) findViewById(R.id.facebookIcon);
         final Cat[] cat = {Cat.create(this)};
-        final Drawable[] catIcon = {new BitmapDrawable(getResources(), cat[0].createLargeIcon(this))};
-        imageView.setImageDrawable(catIcon[0]);
+        final Drawable[] catIcon = {new BitmapDrawable(getResources(), cat[0].createLargeBitmap(this))};
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            imageView.setImageIcon(cat[0].createLargeIcon(this));
+        } else {
+            imageView.setImageDrawable(catIcon[0]);
+        }
         imageView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -58,8 +65,12 @@ public class AboutActivity extends Activity {
             @Override
             public void onClick(View view) {
                 cat[0] = Cat.create(getApplicationContext());
-                catIcon[0] = new BitmapDrawable(getResources(), cat[0].createLargeIcon(getApplicationContext()));
-                imageView.setImageDrawable(catIcon[0]);
+                catIcon[0] = new BitmapDrawable(getResources(), cat[0].createLargeBitmap(getApplicationContext()));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    imageView.setImageIcon(cat[0].createLargeIcon(getApplicationContext()));
+                } else {
+                    imageView.setImageDrawable(catIcon[0]);
+                }
             }
         });
 
