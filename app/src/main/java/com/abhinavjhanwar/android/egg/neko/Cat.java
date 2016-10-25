@@ -297,6 +297,7 @@ public class Cat extends Drawable {
                 ? (hsv[2] - 0.25f)
                 : (hsv[2] + 0.25f);
         pt.setColor(Color.HSVToColor(hsv));
+        pt.setFlags(Paint.ANTI_ALIAS_FLAG);
         float r = w/2;
         canvas.drawCircle(r, r, r, pt);
         int m = w/10;
@@ -309,23 +310,7 @@ public class Cat extends Drawable {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public Icon createLargeIcon(Context context) {
-        final Resources res = context.getResources();
-        final int w = res.getDimensionPixelSize(android.R.dimen.notification_large_icon_width);
-        final int h = res.getDimensionPixelSize(android.R.dimen.notification_large_icon_height);
-        Bitmap result = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        final Canvas canvas = new Canvas(result);
-        final Paint pt = new Paint();
-        float[] hsv = new float[3];
-        Color.colorToHSV(mBodyColor, hsv);
-        hsv[2] = (hsv[2]>0.5f)
-                ? (hsv[2] - 0.25f)
-                : (hsv[2] + 0.25f);
-        pt.setColor(Color.HSVToColor(hsv));
-        float r = w/2;
-        canvas.drawCircle(r, r, r, pt);
-        int m = w/10;
-        slowDraw(canvas, m, m, w-m-m, h-m-m);
-        return Icon.createWithBitmap(result);
+        return Icon.createWithBitmap(createLargeBitmap(context));
     }
 
     @Override

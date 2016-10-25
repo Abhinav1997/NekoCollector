@@ -351,9 +351,11 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
         if (mPrefs.getCatReturns() && !mPrefs.getDoNotShow()) {
             getReturnDialog(this);
         }
-        textView.setText(getResources().getString(R.string.empty_dish));
-        imageView.setImageResource(R.drawable.food_dish);
-        closeAppTextView.setVisibility(View.GONE);
+        if(mPrefs.getFoodState() == 0) {
+            textView.setText(getResources().getString(R.string.empty_dish));
+            imageView.setImageResource(R.drawable.food_dish);
+            closeAppTextView.setVisibility(View.GONE);
+        }
     }
 
     public void getReturnDialog(Context context) {
