@@ -50,9 +50,9 @@ Copyright (C) 2016 The Android Open Source Project
     </integer-array>
     <integer-array name="food_new_cat_prob">
         <item>0</item>
-        <item>5</item>
-        <item>35</item>
-        <item>65</item>
+        <item>45</item>
+        <item>60</item>
+        <item>75</item>
         <item>90</item>
     </integer-array>
 </resources>

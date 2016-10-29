@@ -272,9 +272,26 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
             holder.delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    holder.contextGroup.setVisibility(View.INVISIBLE);
-                    holder.contextGroup.removeCallbacks((Runnable) holder.contextGroup.getTag());
-                    onCatRemove(mCats[holder.getAdapterPosition()]);
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which) {
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    holder.contextGroup.setVisibility(View.INVISIBLE);
+                                    holder.contextGroup.removeCallbacks((Runnable) holder.contextGroup.getTag());
+                                    onCatRemove(mCats[holder.getAdapterPosition()]);
+                                    break;
+
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    //No button clicked
+                                    break;
+                            }
+                        }
+                    };
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(NekoLand.this);
+                    builder.setMessage("Do you want to remove this cat?").setPositiveButton("Yes", dialogClickListener)
+                            .setNegativeButton("No", dialogClickListener).show();
                 }
             });
             holder.share.setOnClickListener(new View.OnClickListener() {

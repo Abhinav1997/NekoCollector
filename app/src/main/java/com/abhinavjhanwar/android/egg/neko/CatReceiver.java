@@ -11,7 +11,7 @@ public class CatReceiver extends BroadcastReceiver {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             NekoService.registerJob(context, 30);
         } else {
-            OldService.registerJob(context, 30);
+            context.startService(new Intent(context, OldService.class));
         }
     }
 }

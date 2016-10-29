@@ -50,7 +50,8 @@ Copyright (C) 2016 The Android Open Source Project
         <service
             android:name=".neko.OldService"
             android:enabled="true"
-            android:exported="false"/>
+            android:exported="false"
+            android:stopWithTask="false"/>
 
         <receiver
             android:name=".neko.CatReceiver"
@@ -60,5 +61,6 @@ Copyright (C) 2016 The Android Open Source Project
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+
     </application>
 </manifest>

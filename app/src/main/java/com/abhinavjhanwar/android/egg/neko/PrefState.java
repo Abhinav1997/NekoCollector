@@ -28,6 +28,8 @@ public class PrefState implements OnSharedPreferenceChangeListener {
 
     private static final String FOOD_STATE = "food";
 
+    private static final String TIME_INTERVAL = "interval";
+
     private static final String CHECKBOX_SHOW_STATE = "donotshow";
 
     private static final String CAT_RETURN_STATE = "cat_returns";
@@ -92,6 +94,14 @@ public class PrefState implements OnSharedPreferenceChangeListener {
 
     public boolean getCatReturns() {
         return mPrefs.getBoolean(CAT_RETURN_STATE, false);
+    }
+
+    public long getTimeInterval() {
+        return mPrefs.getLong(TIME_INTERVAL, 30);
+    }
+
+    public void setTimeInterval(long timeInterval) {
+        mPrefs.edit().putLong(TIME_INTERVAL, timeInterval).apply();
     }
 
     public void setListener(PrefsListener listener) {

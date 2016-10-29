@@ -16,6 +16,7 @@ package com.abhinavjhanwar.android.egg.neko;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
@@ -48,10 +49,11 @@ public class NekoDialog extends Dialog {
         PrefState prefs = new PrefState(getContext());
         int currentState = prefs.getFoodState();
         if (currentState == 0 && food.getType() != 0) {
+            prefs.setTimeInterval(food.getInterval(getContext()));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 NekoService.registerJob(getContext(), food.getInterval(getContext()));
             } else {
-                OldService.registerJob(getContext(), food.getInterval(getContext()));
+                getContext().startService(new Intent(getContext(), OldService.class));
             }
         }
         prefs.setFoodState(food.getType());
