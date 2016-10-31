@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2016 The Android Open Source Project
+   Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+         http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<resources>
+
+    <string name="about">Hakkında</string>
+    <string name="about_caps">HAKKINDA</string>
+    <string name="about_text">Bu uygulama Android Nougat\'ın Easter Egg\'ini baz alarak eski Android versiyonlarındada olmasını sağlar.</string>
+    <string name="instructions_text">Oyun basittir. Yiyecek seçmek için boş tabağa basın. Ardından yemeğin kokusunu alıp size gelecek bir kediyi bekleyin. Ve toplayabileceğiniz kadar benzersiz kedi toplayın.</string>
+    <string name="credits">Krediler:Gogle Android açık kaynak projesi</string>
+    <string name="not_again">Bunu birdaha gösterme.</string>
+    <string name="close_app">Şimdi uygulamadan çıkabilirsin. Bir kedi yakında gelecektir.</string>
+    
+
+
+</resources>
