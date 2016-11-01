@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="food_names">
+                <item>Boş Tabak</item>
+                <item>Kırıntı</item>
+                <item>Balık</item>
+                <item>Tavuk</item>
+                <item>Tatlı</item>
+    </string-array>
+</resources>

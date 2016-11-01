@@ -26,11 +26,4 @@ Copyright (C) 2016 The Android Open Source Project
     <string name="cat_notif_return">Bir kedi geri döndü.</string>
     <string name="cat_dialog_return_title">Bir kedi geri döndü</string>
     <string name="cat_dialog_return_message">Görünüşe bakılırsa eski bir kedi geri döndü. Daha benzersiz kedileri bulmak için farklı bir yiyecek dene.</string>
-    <string-array name="food_names">
-        <item>Boş Tabak</item>
-        <item>Kırıntı</item>
-        <item>Balık</item>
-        <item>Tavuk</item>
-        <item>Tatlı</item>
-    </string-array>
 </resources>

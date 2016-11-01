@@ -33,13 +33,6 @@ Copyright (C) 2016 The Android Open Source Project
     <string name="cat_notif_return">A cat has returned.</string>
     <string name="cat_dialog_return_title">A cat has returned</string>
     <string name="cat_dialog_return_message">Looks like an old cat has returned. Try different food for getting unique cats.</string>
-    <string-array name="food_names">
-        <item>Empty dish</item>
-        <item>Bits</item>
-        <item>Fish</item>
-        <item>Chicken</item>
-        <item>Treat</item>
-    </string-array>
     <array name="food_icons">
         <item>@drawable/food_dish</item>
         <item>@drawable/food_bits</item>
