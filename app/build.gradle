@@ -8,8 +8,8 @@ android {
         applicationId "com.abhinavjhanwar.android.egg"
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode 6
-        versionName "1.1"
+        versionCode 7
+        versionName "1.2"
     }
 
     buildTypes {
