@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.abhinavjhanwar.android.egg.R;
@@ -37,6 +38,8 @@ public class AboutActivity extends AppCompatActivity {
         final ImageView twitterImage = (ImageView) findViewById(R.id.twitterIcon);
         final ImageView gPlusImage = (ImageView) findViewById(R.id.gPlusIcon);
         final ImageView facebookImage = (ImageView) findViewById(R.id.facebookIcon);
+        final TextView creditsText = (TextView) findViewById(R.id.credits);
+        creditsText.setText(getString(R.string.credits) + ": " + getString(R.string.aosp));
         final Cat[] cat = {Cat.create(this)};
         final Drawable[] catIcon = {new BitmapDrawable(getResources(), cat[0].createLargeBitmap(this))};
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

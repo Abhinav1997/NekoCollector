@@ -167,7 +167,7 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
         if (CAT_GEN) {
             mPrefs.addCat(cat);
             new AlertDialog.Builder(NekoLand.this)
-                    .setTitle("Cat added")
+                    .setTitle(getString(R.string.add_cat))
                     .setPositiveButton(android.R.string.ok, null)
                     .show();
         } else {
@@ -290,8 +290,8 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
                     };
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(NekoLand.this);
-                    builder.setMessage("Do you want to remove this cat?").setPositiveButton("Yes", dialogClickListener)
-                            .setNegativeButton("No", dialogClickListener).show();
+                    builder.setMessage(getString(R.string.remove_cat)).setPositiveButton(android.R.string.yes, dialogClickListener)
+                            .setNegativeButton(android.R.string.no, dialogClickListener).show();
                 }
             });
             holder.share.setOnClickListener(new View.OnClickListener() {
@@ -391,9 +391,9 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
             }
         });
         AlertDialog dialog = new AlertDialog.Builder(context)
-                .setTitle("A cat has returned")
-                .setMessage("Looks like an old cat has returned. Try different food for getting unique cats.")
-                .setPositiveButton("OK", null)
+                .setTitle(getString(R.string.cat_dialog_return_title))
+                .setMessage(getString(R.string.cat_dialog_return_message))
+                .setPositiveButton(getString(android.R.string.ok), null)
                 .create();
         dialog.setView(checkBoxView, (int)(19*dpi), (int)(5*dpi), (int)(14*dpi), (int)(5*dpi));
         dialog.show();

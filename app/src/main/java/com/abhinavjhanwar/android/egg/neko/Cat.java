@@ -201,7 +201,7 @@ public class Cat extends Drawable {
 
     public Notification.Builder buildNotification(Context context) {
         final Bundle extras = new Bundle();
-        extras.putString("android.substName", context.getString(R.string.notification_name));
+        extras.putString("android.substName", context.getString(R.string.app_name));
         final Intent intent = new Intent(Intent.ACTION_MAIN)
                 .setClass(context, NekoLand.class)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -232,7 +232,7 @@ public class Cat extends Drawable {
 
     public NotificationCompat.Builder buildNotificationbelowM(Context context) {
         final Bundle extras = new Bundle();
-        extras.putString("android.substName", context.getString(R.string.notification_name));
+        extras.putString("android.substName", context.getString(R.string.app_name));
         final Intent intent = new Intent(Intent.ACTION_MAIN)
                 .setClass(context, NekoLand.class)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -31,7 +31,7 @@ public class OldService extends Service {
 
     public static float INTERVAL_JITTER_FRAC = 0.25f;
 
-    public static String notificationText = "A cat is here.";
+    public static String notificationText;
 
     @Override
     public void onCreate() {
@@ -42,6 +42,7 @@ public class OldService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         final Context context = this;
+        notificationText = getString(R.string.cat_notif_default);
         final PrefState prefs = new PrefState(this);
         long intervalMinutes = prefs.getTimeInterval();
         long interval = intervalMinutes * MINUTES;
@@ -67,12 +68,12 @@ public class OldService extends Service {
                         if (cats.size() == 0 || rng.nextFloat() <= new_cat_prob) {
                             cat = Cat.create(context);
                             prefs.addCat(cat);
-                            notificationText = "A new cat is here.";
+                            notificationText = getString(R.string.cat_notif_new);
                             prefs.setCatReturns(false);
                             Log.v(TAG, "A new cat is here: " + cat.getName());
                         } else {
                             cat = cats.get(rng.nextInt(cats.size()));
-                            notificationText = "A cat has returned.";
+                            notificationText = getString(R.string.cat_notif_return);
                             prefs.setCatReturns(true);
                             Log.v(TAG, "A cat has returned: " + cat.getName());
                         }

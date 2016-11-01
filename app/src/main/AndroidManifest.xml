@@ -37,7 +37,7 @@ Copyright (C) 2016 The Android Open Source Project
         </activity>
 
         <activity android:name=".neko.AboutActivity"
-            android:label="About"
+            android:label="@string/about"
             android:theme="@style/AppTheme" />
 
         <!-- This is where the magic happens -->

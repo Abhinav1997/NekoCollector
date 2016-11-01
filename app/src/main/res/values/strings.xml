@@ -16,18 +16,24 @@ Copyright (C) 2016 The Android Open Source Project
 -->
 <resources>
     <string name="app_name" translatable="false">Neko Collector</string>
-    <string name="notification_name" translatable="false">Android Neko</string>
     <string name="default_cat_name" translatable="false">Cat #%s</string>
     <string name="directory_name" translatable="false">Cats</string>
-    <string name="empty_dish" translatable="false">Empty dish</string>
+    <string name="empty_dish">Empty dish</string>
     <string name="about">About</string>
-    <string name="about_caps">ABOUT</string>
     <string name="about_text">This is based on Android Nougat\'s Easter Egg and made available for older android versions.</string>
     <string name="instructions_text">The game is simple. Click on the empty dish to select a food. Now wait for a cat to smell the food and come to you. Collect as many unique cats as you can!</string>
-    <string name="credits">Credits: Android Open Source Project by Google</string>
+    <string name="credits">Credits</string>
+    <string name="aosp" translatable="false">Android Open Source Project</string>
     <string name="not_again">Don\'t show this again.</string>
     <string name="close_app">You can exit the app now. A cat will come soon.</string>
-    <string-array name="food_names" translatable="false">
+    <string name="add_cat">Cat added</string>
+    <string name="remove_cat">Do you want to remove this cat?</string>
+    <string name="cat_notif_default">A cat is here.</string>
+    <string name="cat_notif_new">A new cat is here.</string>
+    <string name="cat_notif_return">A cat has returned.</string>
+    <string name="cat_dialog_return_title">A cat has returned</string>
+    <string name="cat_dialog_return_message">Looks like an old cat has returned. Try different food for getting unique cats.</string>
+    <string-array name="food_names">
         <item>Empty dish</item>
         <item>Bits</item>
         <item>Fish</item>
@@ -50,9 +56,9 @@ Copyright (C) 2016 The Android Open Source Project
     </integer-array>
     <integer-array name="food_new_cat_prob">
         <item>0</item>
-        <item>45</item>
-        <item>60</item>
-        <item>75</item>
+        <item>30</item>
+        <item>50</item>
+        <item>70</item>
         <item>90</item>
     </integer-array>
 </resources>

@@ -49,12 +49,13 @@ public class NekoService extends JobService {
 
     public static float INTERVAL_JITTER_FRAC = 0.25f;
 
-    public static String notificationText = "A cat is here.";
+    public static String notificationText;
 
     @Override
     public boolean onStartJob(JobParameters params) {
         Log.v(TAG, "Starting job: " + String.valueOf(params));
 
+        notificationText = getString(R.string.cat_notif_default);
         NotificationManager noman;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             noman = getSystemService(NotificationManager.class);
@@ -63,7 +64,7 @@ public class NekoService extends JobService {
         }
         if (NekoLand.DEBUG_NOTIFICATIONS) {
             final Bundle extras = new Bundle();
-            extras.putString("android.substName", getString(R.string.notification_name));
+            extras.putString("android.substName", getString(R.string.app_name));
             final Cat cat = Cat.create(this);
             final Notification.Builder builder
                     = cat.buildNotification(this)
@@ -86,12 +87,12 @@ public class NekoService extends JobService {
                 if (cats.size() == 0 || rng.nextFloat() <= new_cat_prob) {
                     cat = Cat.create(this);
                     prefs.addCat(cat);
-                    notificationText = "A new cat is here.";
+                    notificationText = getString(R.string.cat_notif_new);
                     prefs.setCatReturns(false);
                     Log.v(TAG, "A new cat is here: " + cat.getName());
                 } else {
                     cat = cats.get(rng.nextInt(cats.size()));
-                    notificationText = "A cat has returned.";
+                    notificationText = getString(R.string.cat_notif_return);
                     prefs.setCatReturns(true);
                     Log.v(TAG, "A cat has returned: " + cat.getName());
                 }
