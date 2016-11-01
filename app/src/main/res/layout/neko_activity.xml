@@ -64,8 +64,6 @@ Copyright (C) 2016 The Android Open Source Project
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"/>
 
-
-
     </RelativeLayout>
 
 </android.support.v4.widget.NestedScrollView>

@@ -21,6 +21,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,7 @@ public class NekoDialog extends Dialog {
         NekoLand.imageView.setImageResource(food.getIcon(getContext()));
         NekoLand.textView.setText(food.getName(getContext()));
         NekoLand.closeAppTextView.setVisibility(View.VISIBLE);
+        NekoLand.closeAppTextView.setGravity(Gravity.CENTER_HORIZONTAL);
         dismiss();
     }
 
