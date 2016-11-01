@@ -62,13 +62,13 @@ import java.util.Comparator;
 import java.util.List;
 
 public class NekoLand extends AppCompatActivity implements PrefState.PrefsListener {
-    public static boolean DEBUG_NOTIFICATIONS = false;
+    public static final boolean DEBUG_NOTIFICATIONS = false;
 
     private static final int STORAGE_PERM_REQUEST = 123;
 
     public static int DIALOG_THEME;
 
-    private static boolean CAT_GEN = false;
+    private static final boolean CAT_GEN = false;
     private PrefState mPrefs;
     private CatAdapter mAdapter;
     private Cat mPendingShareCat;
@@ -386,7 +386,7 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
         }
     }
 
-    public void getReturnDialog(Context context) {
+    private void getReturnDialog(Context context) {
         View checkBoxView = View.inflate(this, R.layout.checkbox, null);
         CheckBox checkBox = (CheckBox) checkBoxView.findViewById(R.id.skip_dialog);
         float dpi = context.getResources().getDisplayMetrics().density;

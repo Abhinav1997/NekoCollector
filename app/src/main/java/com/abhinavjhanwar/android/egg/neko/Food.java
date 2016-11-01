@@ -19,7 +19,7 @@ import android.content.res.TypedArray;
 
 import com.abhinavjhanwar.android.egg.R;
 
-public class Food {
+class Food {
     private final int mType;
 
     private static int[] sIcons;

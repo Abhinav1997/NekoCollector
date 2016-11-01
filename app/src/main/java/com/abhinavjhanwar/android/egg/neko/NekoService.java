@@ -38,16 +38,16 @@ public class NekoService extends JobService {
 
     private static final String TAG = "NekoService";
 
-    public static int JOB_ID = 43;
+    private static final int JOB_ID = 43;
 
-    public static int CAT_NOTIFICATION = 1;
+    private static final int CAT_NOTIFICATION = 1;
 
-    public static float CAT_CAPTURE_PROB = 1.0f; // generous
+    private static final float CAT_CAPTURE_PROB = 1.0f; // generous
 
-    public static long SECONDS = 1000;
-    public static long MINUTES = 60 * SECONDS;
+    private static final long SECONDS = 1000;
+    private static final long MINUTES = 60 * SECONDS;
 
-    public static float INTERVAL_JITTER_FRAC = 0.25f;
+    private static final float INTERVAL_JITTER_FRAC = 0.25f;
 
     public static String notificationText;
 
@@ -148,7 +148,7 @@ public class NekoService extends JobService {
         }
     }
 
-    public static void cancelJob(Context context) {
+    private static void cancelJob(Context context) {
         JobScheduler jss;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             jss = context.getSystemService(JobScheduler.class);

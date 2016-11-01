@@ -22,14 +22,14 @@ public class OldService extends Service {
 
     private static final String TAG = "NekoService";
 
-    public static int CAT_NOTIFICATION = 1;
+    private static final int CAT_NOTIFICATION = 1;
 
-    public static float CAT_CAPTURE_PROB = 1.0f; // generous
+    private static final float CAT_CAPTURE_PROB = 1.0f; // generous
 
-    public static long SECONDS = 1000;
-    public static long MINUTES = 60 * SECONDS;
+    private static final long SECONDS = 1000;
+    private static final long MINUTES = 60 * SECONDS;
 
-    public static float INTERVAL_JITTER_FRAC = 0.25f;
+    private static final float INTERVAL_JITTER_FRAC = 0.25f;
 
     public static String notificationText;
 
@@ -47,7 +47,7 @@ public class OldService extends Service {
         long intervalMinutes = prefs.getTimeInterval();
         long interval = intervalMinutes * MINUTES;
         long jitter = (long) (INTERVAL_JITTER_FRAC * interval);
-        interval += (long) (Math.random() * (2 * jitter)) - jitter;
+        interval += (long) (Math.random() * (2 * jitter)) - jitter;;
         Log.d(TAG, "A cat will visit in " + interval + "ms: ");
         Runnable mRunnable;
         Handler mHandler = new Handler();
@@ -97,6 +97,7 @@ public class OldService extends Service {
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
+        //Credits: http://stackoverflow.com/a/20681898
         Log.d(TAG, "onTaskRemoved()");
         Intent restartService = new Intent(getApplicationContext(), this.getClass());
         restartService.setPackage(getPackageName());

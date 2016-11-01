@@ -117,13 +117,13 @@ public class AboutActivity extends AppCompatActivity {
         }
     }
 
-    public String getCatEmoji() {
+    private String getCatEmoji() {
         String[] catEmojiList = {new String(Character.toChars(0x1F638)), new String(Character.toChars(0x1F639)), new String(Character.toChars(0x1F640)), new String(Character.toChars(0x1F63A)), new String(Character.toChars(0x1F63B)), new String(Character.toChars(0x1F63C)), new String(Character.toChars(0x1F63D)), new String(Character.toChars(0x1F63E)), new String(Character.toChars(0x1F63F))};
         Random r = new Random();
         return catEmojiList[r.nextInt(catEmojiList.length)];
     }
 
-    public void openLink(String URL) {
+    private void openLink(String URL) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(URL));
         startActivity(intent);
     }

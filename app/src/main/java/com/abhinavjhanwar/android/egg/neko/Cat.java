@@ -40,11 +40,11 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Cat extends Drawable {
-    public static final long[] PURR = {0, 40, 20, 40, 20, 40, 20, 40, 20, 40, 20, 40};
+    private static final long[] PURR = {0, 40, 20, 40, 20, 40, 20, 40, 20, 40, 20, 40};
 
     private Random mNotSoRandom;
     private Bitmap mBitmap;
-    private long mSeed;
+    private final long mSeed;
     private String mName;
     private int mBodyColor;
 
@@ -56,15 +56,17 @@ public class Cat extends Drawable {
         return mNotSoRandom;
     }
 
-    public static final float frandrange(Random r, float a, float b) {
+    private static float frandrange(Random r) {
+        float a = 0.5f;
+        float b = 1f;
         return (b-a)*r.nextFloat() + a;
     }
 
-    public static final Object choose(Random r, Object...l) {
+    private static Object choose(Random r, Object...l) {
         return l[r.nextInt(l.length)];
     }
 
-    public static final int chooseP(Random r, int[] a) {
+    private static int chooseP(Random r, int[] a) {
         int pct = r.nextInt(1000);
         final int stop = a.length-2;
         int i=0;
@@ -76,7 +78,7 @@ public class Cat extends Drawable {
         return a[i+1];
     }
 
-    public static final int[] P_BODY_COLORS = {
+    private static final int[] P_BODY_COLORS = {
             180, 0xFF212121, // black
             180, 0xFFFFFFFF, // white
             140, 0xFF616161, // gray
@@ -91,7 +93,7 @@ public class Cat extends Drawable {
               1, 0,          // ?!?!?!
     };
 
-    public static final int[] P_COLLAR_COLORS = {
+    private static final int[] P_COLLAR_COLORS = {
             250, 0xFFFFFFFF,
             250, 0xFF000000,
             250, 0xFFF44336,
@@ -102,25 +104,25 @@ public class Cat extends Drawable {
              50, 0xFF4CAF50,
     };
 
-    public static final int[] P_BELLY_COLORS = {
+    private static final int[] P_BELLY_COLORS = {
             750, 0,
             250, 0xFFFFFFFF,
     };
 
-    public static final int[] P_DARK_SPOT_COLORS = {
+    private static final int[] P_DARK_SPOT_COLORS = {
             700, 0,
             250, 0xFF212121,
              50, 0xFF6D4C41,
     };
 
-    public static final int[] P_LIGHT_SPOT_COLORS = {
+    private static final int[] P_LIGHT_SPOT_COLORS = {
             700, 0,
             300, 0xFFFFFFFF,
     };
 
-    private CatParts D;
+    private final CatParts D;
 
-    public static void tint(int color, Drawable ... ds) {
+    private static void tint(int color, Drawable ... ds) {
         for (Drawable d : ds) {
             if (d != null) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -132,7 +134,7 @@ public class Cat extends Drawable {
         }
     }
 
-    public static boolean isDark(int color) {
+    private static boolean isDark(int color) {
         final int r = (color & 0xFF0000) >> 16;
         final int g = (color & 0x00FF00) >> 8;
         final int b = color & 0x0000FF;
@@ -151,7 +153,7 @@ public class Cat extends Drawable {
         // body color
         mBodyColor = chooseP(nsr, P_BODY_COLORS);
         if (mBodyColor == 0) mBodyColor = Color.HSVToColor(new float[] {
-                nsr.nextFloat()*360f, frandrange(nsr,0.5f,1f), frandrange(nsr,0.5f, 1f)});
+                nsr.nextFloat()*360f, frandrange(nsr), frandrange(nsr)});
 
         tint(mBodyColor, D.body, D.head, D.leg1, D.leg2, D.leg3, D.leg4, D.tail,
                 D.leftEar, D.rightEar, D.foot1, D.foot2, D.foot3, D.foot4, D.tailCap);
@@ -252,13 +254,12 @@ public class Cat extends Drawable {
 
     @Override
     public void draw(@NonNull Canvas canvas) {
-        final int w = Math.min(canvas.getWidth(), canvas.getHeight());
-        final int h = w;
+        final int hw = Math.min(canvas.getWidth(), canvas.getHeight());
 
-        if (mBitmap == null || mBitmap.getWidth() != w || mBitmap.getHeight() != h) {
-            mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        if (mBitmap == null || mBitmap.getWidth() != hw || mBitmap.getHeight() != hw) {
+            mBitmap = Bitmap.createBitmap(hw, hw, Bitmap.Config.ARGB_8888);
             final Canvas bitCanvas = new Canvas(mBitmap);
-            slowDraw(bitCanvas, 0, 0, w, h);
+            slowDraw(bitCanvas, 0, 0, hw, hw);
         }
         canvas.drawBitmap(mBitmap, 0, 0, null);
     }
@@ -336,40 +337,40 @@ public class Cat extends Drawable {
         this.mName = name;
     }
 
-    public int getBodyColor() {
+    private int getBodyColor() {
         return mBodyColor;
     }
 
     public static class CatParts {
-        public Drawable leftEar;
-        public Drawable rightEar;
-        public Drawable rightEarInside;
-        public Drawable leftEarInside;
-        public Drawable head;
-        public Drawable faceSpot;
-        public Drawable cap;
-        public Drawable mouth;
-        public Drawable body;
-        public Drawable foot1;
-        public Drawable leg1;
-        public Drawable foot2;
-        public Drawable leg2;
-        public Drawable foot3;
-        public Drawable leg3;
-        public Drawable foot4;
-        public Drawable leg4;
-        public Drawable tail;
-        public Drawable leg2Shadow;
-        public Drawable tailShadow;
-        public Drawable tailCap;
-        public Drawable belly;
-        public Drawable back;
-        public Drawable rightEye;
-        public Drawable leftEye;
-        public Drawable nose;
-        public Drawable bowtie;
-        public Drawable collar;
-        public Drawable[] drawingOrder;
+        public final Drawable leftEar;
+        public final Drawable rightEar;
+        public final Drawable rightEarInside;
+        public final Drawable leftEarInside;
+        public final Drawable head;
+        public final Drawable faceSpot;
+        public final Drawable cap;
+        public final Drawable mouth;
+        public final Drawable body;
+        public final Drawable foot1;
+        public final Drawable leg1;
+        public final Drawable foot2;
+        public final Drawable leg2;
+        public final Drawable foot3;
+        public final Drawable leg3;
+        public final Drawable foot4;
+        public final Drawable leg4;
+        public final Drawable tail;
+        public final Drawable leg2Shadow;
+        public final Drawable tailShadow;
+        public final Drawable tailCap;
+        public final Drawable belly;
+        public final Drawable back;
+        public final Drawable rightEye;
+        public final Drawable leftEye;
+        public final Drawable nose;
+        public final Drawable bowtie;
+        public final Drawable collar;
+        public final Drawable[] drawingOrder;
 
         public CatParts(Context context) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

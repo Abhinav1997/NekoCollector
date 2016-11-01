@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class PrefState implements OnSharedPreferenceChangeListener {
+class PrefState implements OnSharedPreferenceChangeListener {
 
     private static final String FILE_NAME = "mPrefs";
 
