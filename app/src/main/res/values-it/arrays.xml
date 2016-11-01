@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="food_names">
+        <item>Ciotola Vuota</item>
+        <item>Croccantini</item>
+        <item>Pesce</item>
+        <item>Pollo</item>
+        <item>Dolcetto</item>
+    </string-array>
+</resources>
