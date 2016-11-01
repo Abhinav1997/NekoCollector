@@ -121,6 +121,7 @@ public class NekoService extends JobService {
         long interval = intervalMinutes * MINUTES;
         long jitter = (long)(INTERVAL_JITTER_FRAC * interval);
         interval += (long)(Math.random() * (2 * jitter)) - jitter;
+
         final JobInfo jobInfo = new JobInfo.Builder(JOB_ID,
                 new ComponentName(context, NekoService.class))
                 .setMinimumLatency(interval)

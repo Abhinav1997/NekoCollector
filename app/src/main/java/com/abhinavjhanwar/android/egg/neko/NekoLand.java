@@ -55,6 +55,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class NekoLand extends AppCompatActivity implements PrefState.PrefsListener {
     public static boolean DEBUG_NOTIFICATIONS = false;
@@ -145,15 +150,21 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
     }
 
     private void updateCats() {
-        Cat[] cats;
+        List<Cat> cats;
         if (CAT_GEN) {
-            cats = new Cat[50];
-            for (int i = 0; i < cats.length; i++) {
-                cats[i] = Cat.create(this);
+            cats = new ArrayList<>(50);
+            for (int i = 0; i < cats.size(); i++) {
+                cats.add(Cat.create(this));
             }
         } else {
-            cats = mPrefs.getCats().toArray(new Cat[0]);
+            cats = new ArrayList<>(Arrays.asList(mPrefs.getCats().toArray(new Cat[0])));
         }
+        Collections.sort(cats, new Comparator<Cat>() {
+            @Override
+            public int compare(Cat cat, Cat t1) {
+                return  cat.getName().compareTo(t1.getName());
+            }
+        });
         mAdapter.setCats(cats);
 
         if (mPrefs.getFoodState() == 0) {
@@ -225,9 +236,9 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
 
     private class CatAdapter extends RecyclerView.Adapter<CatHolder> {
 
-        private Cat[] mCats;
+        private List<Cat> mCats = new ArrayList<>();
 
-        public void setCats(Cat[] cats) {
+        public void setCats(List<Cat> cats) {
             mCats = cats;
             notifyDataSetChanged();
         }
@@ -242,15 +253,15 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
         public void onBindViewHolder(final CatHolder holder, int position) {
             Context context = holder.itemView.getContext();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                holder.imageView.setImageIcon(mCats[position].createLargeIcon(context));
+                holder.imageView.setImageIcon(mCats.get(position).createLargeIcon(context));
             } else {
-                holder.imageView.setImageBitmap(mCats[position].createLargeBitmap(context));
+                holder.imageView.setImageBitmap(mCats.get(position).createLargeBitmap(context));
             }
-            holder.textView.setText(mCats[position].getName());
+            holder.textView.setText(mCats.get(position).getName());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onCatClick(mCats[holder.getAdapterPosition()]);
+                    onCatClick(mCats.get(holder.getAdapterPosition()));
                 }
             });
             holder.itemView.setOnLongClickListener(new OnLongClickListener() {
@@ -279,7 +290,7 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
                                 case DialogInterface.BUTTON_POSITIVE:
                                     holder.contextGroup.setVisibility(View.INVISIBLE);
                                     holder.contextGroup.removeCallbacks((Runnable) holder.contextGroup.getTag());
-                                    onCatRemove(mCats[holder.getAdapterPosition()]);
+                                    onCatRemove(mCats.get(holder.getAdapterPosition()));
                                     break;
 
                                 case DialogInterface.BUTTON_NEGATIVE:
@@ -297,7 +308,7 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
             holder.share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Cat cat = mCats[holder.getAdapterPosition()];
+                    Cat cat = mCats.get(holder.getAdapterPosition());
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                                 != PackageManager.PERMISSION_GRANTED) {
@@ -315,7 +326,7 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
 
         @Override
         public int getItemCount() {
-            return mCats.length;
+            return mCats.size();
         }
     }
 
