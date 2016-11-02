@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="empty_dish">Piring kosong</string>
+    <string name="about">Tentang app</string>
+    <string name="about_text">Ini adalah aplikasi yang berbasis pada Easter Egg di Android Nougat dan dirancang untuk berjalan pada versi Android terdahulu</string>
+    <string name="instructions_text">Permainannya sederhana. Klik piring kosong dan pilih makanan. Lalu tunggu hingga seekor kucing mencium makanan tersebut dan mendatangi kamu. kumpulkan kucing-kucing yang berbeda sebanyak-banyaknya!</string>
+    <string name="credits">Kredit</string>
+    <string name="not_again">Jangan tampilkan ini lagi</string>
+    <string name="close_app">Kamu bisa keluar dari app sekarang. Seekor kucing akan segera datang.</string>
+    <string name="add_cat">Kucing telah ditambahkan</string>
+    <string name="remove_cat">Apakah kamu mau menghapus kucing ini?</string>
+    <string name="cat_notif_default">Seekor kucing telah datang.</string>
+    <string name="cat_notif_new">Seekor kucing baru telah datang.</string>
+    <string name="cat_notif_return">Seekor kucing telah kembali.</string>
+    <string name="cat_dialog_return_title">Seekor kucing telah kembali</string>
+    <string name="cat_dialog_return_message">Sepertinya seekor kucing lama telah kembali. Coba makanan yang berbeda untuk mendapatkan kucing yang baru.</string>
+</resources>
