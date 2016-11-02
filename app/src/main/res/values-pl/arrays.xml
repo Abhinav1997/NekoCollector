@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="food_names">
+        <item>Pusty talerz</item>
+        <item>Kąski</item>
+        <item>Ryba</item>
+        <item>Kurczak</item>
+        <item>Przysmak</item>
+    </string-array>
+</resources>
