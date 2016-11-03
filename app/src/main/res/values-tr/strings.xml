@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="default_cat_name">Kedi #%s</string>
+    <string name="directory_name">Kediler</string> 
     <string name="empty_dish">Boş Tabak</string>
     <string name="about">Hakkında</string>
     <string name="about_text">Bu uygulama Android Nougat\'ın Easter Egg\'ini baz alarak eski Android versiyonlarındada olmasını sağlar.</string>
