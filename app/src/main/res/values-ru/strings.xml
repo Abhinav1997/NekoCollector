@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="default_cat_name">Кот #%s</string>
-  <string name="directory_name">Коты</string>
-  <string name="empty_dish">Пустая миска</string>
-  <string name="about">Описание</string>
-  <string name="about_text">Приложение основано на \"Пасхальном яйце\" Android Nougat и доступно для предыдуших версий Android.</string>
-  <string name="instructions_text">Игра очень проста. Чтобы выбрать корм, нажмите на пустую миску. Теперь ждите, когда кот почувствует запах и прибежит. Собирайте столько уникальных котов, сколько можете!</string>
-  <string name="credits">Авторы</string>
-  <string name="not_again">Не показывать это снова.</string>
-  <string name="close_app">Теперь вы можете закрыть приложение. Кот придёт чуть позже.</string>
-  <string name="add_cat">Кот добавлен</string>
-  <string name="remove_cat">Вы действительно хотите прогнать этого кота?</string>
-  <string name="cat_notif_default">Здесь кот.</string>
-  <string name="cat_notif_new">На запах прибежал новый кот.</string>
-  <string name="cat_notif_return">Ваш кот вернулся.</string>
-  <string name="cat_dialog_return_title">Кот вернулся</string>
-  <string name="cat_dialog_return_message">Похоже это вернулся Ваш кот. Пробуйте разные виды корма, чтобы приманить новых котов.</string>
+    <string name="empty_dish">Пустая миска</string>
+    <string name="about">Описание</string>
+    <string name="about_text">Приложение основано на \"Пасхальном яйце\" Android Nougat и доступно для предыдуших версий Android.</string>
+    <string name="instructions_text">Игра очень проста. Чтобы выбрать корм, нажмите на пустую миску. Теперь ждите, когда кот почувствует запах и прибежит. Собирайте столько уникальных котов, сколько можете!</string>
+    <string name="credits">Авторы</string>
+    <string name="not_again">Не показывать это снова.</string>
+    <string name="close_app">Теперь вы можете закрыть приложение. Кот придёт чуть позже.</string>
+    <string name="add_cat">Кот добавлен</string>
+    <string name="remove_cat">Вы действительно хотите прогнать этого кота?</string>
+    <string name="cat_notif_default">Здесь кот.</string>
+    <string name="cat_notif_new">На запах прибежал новый кот.</string>
+    <string name="cat_notif_return">Ваш кот вернулся.</string>
+    <string name="cat_dialog_return_title">Кот вернулся</string>
+    <string name="cat_dialog_return_message">Похоже это вернулся Ваш кот. Пробуйте разные виды корма, чтобы приманить новых котов.</string>
 </resources>
