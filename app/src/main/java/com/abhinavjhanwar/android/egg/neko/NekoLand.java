@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -41,6 +40,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -53,6 +53,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.abhinavjhanwar.android.egg.R;
 
@@ -60,7 +61,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -81,6 +81,9 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
     public static ImageView imageView;
     public static TextView textView, closeAppTextView;
 
+    private static final int SHORTCUT_ACTION_SET_FOOD = 0xf001;
+    private static final int SHORTCUT_ACTION_OPEN_SELECTOR = 0xf002;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -99,14 +102,17 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
 
         mPrefs = new PrefState(this);
         mPrefs.setListener(this);
+
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.holder);
         imageView = (ImageView) findViewById(R.id.food_icon);
         textView = (TextView) findViewById(R.id.food);
         closeAppTextView = (TextView) findViewById(R.id.close_app);
         recyclerView.setNestedScrollingEnabled(false);
+
         final NekoDialog nekoDialog = new NekoDialog(this);
         final int[] foodState = {mPrefs.getFoodState()};
         Food food = new Food(foodState[0]);
+
         textView.setText(food.getName(this));
         imageView.setImageResource(food.getIcon(this));
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -124,12 +130,14 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
                 }
             }
         });
+
         mAdapter = new CatAdapter();
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         updateCats();
         recyclerView.setFocusable(false);
 
+        handleShortcutIntent(getIntent());
         createShortcuts();
     }
 
@@ -182,27 +190,67 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
         }
     }
 
+    private void handleShortcutIntent(Intent intent) {
+        int intentAction = intent.getIntExtra("action", 0);
+        if (intentAction == SHORTCUT_ACTION_OPEN_SELECTOR) {
+            NekoDialog dialog = new NekoDialog(this);
+            dialog.show();
+        }
+        else if (intentAction == SHORTCUT_ACTION_SET_FOOD) {
+            updateFoodByIntent(new Food(intent.getIntExtra("food", 0)));
+        }
+    }
+
+    private void updateFoodByIntent(Food food) {
+        NekoDialog dialog = new NekoDialog(this);
+        dialog.selectFood(food);
+
+        imageView.setImageResource(food.getIcon(this));
+        textView.setText(food.getName(this));
+        closeAppTextView.setVisibility(View.VISIBLE);
+        closeAppTextView.setGravity(Gravity.CENTER_HORIZONTAL);
+    }
+
     @TargetApi(Build.VERSION_CODES.N_MR1)
-    private void createShortcuts() {
+    public void createShortcuts() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
 
-            List<ShortcutInfo> shortcuts = new ArrayList<>();
-            int mFoodCount = getResources().getStringArray(R.array.food_names).length;
+            final PrefState prefs = new PrefState(this);
+            int currentFoodState = prefs.getFoodState();
+            final List<ShortcutInfo> shortcuts = new ArrayList<>();
+            final int mFoodCount = getResources().getStringArray(R.array.food_names).length;
 
-            for (int i = 1; i < mFoodCount; i++) {
-                Food food = new Food(i);
+            if (currentFoodState == 0) {
+                for (int i = 1; i < mFoodCount; i++) {
+                    final Food food = new Food(i);
 
-                Intent action = new Intent();
-                action.setAction(NekoDialog.class.toString());
+                    final Intent action = new Intent(this, NekoLand.class)
+                        .setAction(Intent.ACTION_VIEW)
+                        .putExtra("action", NekoLand.SHORTCUT_ACTION_SET_FOOD)
+                        .putExtra("food", i);
 
-                ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "food" + i)
-                    .setShortLabel(food.getName(this))
-                    .setLongLabel(food.getName(this))
-                    .setIcon(Icon.createWithResource(this, food.getIcon(this)))
-                    .setIntent(action)
+                    final ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "food" + i)
+                        .setShortLabel(food.getName(this))
+                        .setLongLabel(food.getName(this))
+                        .setIcon(Icon.createWithResource(this, food.getIcon(this)))
+                        .setIntent(action)
+                        .build();
+                    shortcuts.add(shortcut);
+                }
+            } else {
+                // Add current
+                final Food currentFood = new Food(currentFoodState);
+                final Intent currentActionIntent = new Intent(this, NekoLand.class)
+                    .setAction(Intent.ACTION_VIEW)
+                    .putExtra("action", NekoLand.SHORTCUT_ACTION_OPEN_SELECTOR);
+                final ShortcutInfo currentFoodShortcut = new ShortcutInfo.Builder(this, "current")
+                    .setShortLabel(currentFood.getName(this))
+                    .setLongLabel(getString(R.string.current_dish).replace("%s", currentFood.getName(this)))
+                    .setIcon(Icon.createWithResource(this, currentFood.getIcon(this)))
+                    .setIntent(currentActionIntent)
                     .build();
-                shortcuts.add(shortcut);
+                shortcuts.add(currentFoodShortcut);
             }
 
             shortcutManager.setDynamicShortcuts(shortcuts);
@@ -414,11 +462,12 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
         if (mPrefs.getCatReturns() && !mPrefs.getDoNotShow()) {
             getReturnDialog(this);
         }
-        if(mPrefs.getFoodState() == 0) {
+        if (mPrefs.getFoodState() == 0) {
             textView.setText(getResources().getString(R.string.empty_dish));
             imageView.setImageResource(R.drawable.food_dish);
             closeAppTextView.setVisibility(View.GONE);
         }
+        handleShortcutIntent(intent);
     }
 
     private void getReturnDialog(Context context) {

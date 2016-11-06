@@ -54,4 +54,5 @@ Copyright (C) 2016 The Android Open Source Project
         <item>70</item>
         <item>90</item>
     </integer-array>
+    <string name="current_dish">Current: %s</string>
 </resources>
