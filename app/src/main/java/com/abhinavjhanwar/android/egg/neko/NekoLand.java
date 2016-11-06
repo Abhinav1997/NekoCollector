@@ -15,15 +15,20 @@
 package com.abhinavjhanwar.android.egg.neko;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
@@ -55,6 +60,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -123,6 +129,8 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         updateCats();
         recyclerView.setFocusable(false);
+
+        createShortcuts();
     }
 
     @Override
@@ -171,6 +179,33 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
             textView.setText(getResources().getString(R.string.empty_dish));
             imageView.setImageResource(R.drawable.food_dish);
             closeAppTextView.setVisibility(View.GONE);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.N_MR1)
+    private void createShortcuts() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
+
+            List<ShortcutInfo> shortcuts = new ArrayList<>();
+            int mFoodCount = getResources().getStringArray(R.array.food_names).length;
+
+            for (int i = 1; i < mFoodCount; i++) {
+                Food food = new Food(i);
+
+                Intent action = new Intent();
+                action.setAction(NekoDialog.class.toString());
+
+                ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "food" + i)
+                    .setShortLabel(food.getName(this))
+                    .setLongLabel(food.getName(this))
+                    .setIcon(Icon.createWithResource(this, food.getIcon(this)))
+                    .setIntent(action)
+                    .build();
+                shortcuts.add(shortcut);
+            }
+
+            shortcutManager.setDynamicShortcuts(shortcuts);
         }
     }
 
