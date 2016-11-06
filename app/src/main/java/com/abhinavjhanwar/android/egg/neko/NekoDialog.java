@@ -69,6 +69,7 @@ public class NekoDialog extends Dialog {
         NekoLand.closeAppTextView.setVisibility(View.VISIBLE);
         NekoLand.closeAppTextView.setGravity(Gravity.CENTER_HORIZONTAL);
         dismiss();
+        new NekoShortcuts(getContext()).updateShortcuts();
     }
 
     private class Adapter extends RecyclerView.Adapter<Holder> {

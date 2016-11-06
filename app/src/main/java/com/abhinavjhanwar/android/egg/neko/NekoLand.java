@@ -81,9 +81,8 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
     public static ImageView imageView;
     public static TextView textView, closeAppTextView;
 
-    private static final int SHORTCUT_ACTION_SET_FOOD = 0xf001;
-    private static final int SHORTCUT_ACTION_OPEN_SELECTOR = 0xf002;
-
+    public static final int SHORTCUT_ACTION_SET_FOOD = 0xf001;
+    public static final int SHORTCUT_ACTION_OPEN_SELECTOR = 0xf002;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -138,7 +137,7 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
         recyclerView.setFocusable(false);
 
         handleShortcutIntent(getIntent());
-        createShortcuts();
+        new NekoShortcuts(this).updateShortcuts();
     }
 
     @Override
@@ -187,73 +186,27 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
             textView.setText(getResources().getString(R.string.empty_dish));
             imageView.setImageResource(R.drawable.food_dish);
             closeAppTextView.setVisibility(View.GONE);
+            new NekoShortcuts(this).updateShortcuts();
         }
     }
 
     private void handleShortcutIntent(Intent intent) {
         int intentAction = intent.getIntExtra("action", 0);
+
         if (intentAction == SHORTCUT_ACTION_OPEN_SELECTOR) {
             NekoDialog dialog = new NekoDialog(this);
             dialog.show();
         }
         else if (intentAction == SHORTCUT_ACTION_SET_FOOD) {
-            updateFoodByIntent(new Food(intent.getIntExtra("food", 0)));
-        }
-    }
+            final Food food = new Food(intent.getIntExtra("food", 0));
+            NekoDialog dialog = new NekoDialog(this);
+            dialog.selectFood(food);
+            new NekoShortcuts(this).updateShortcuts();
 
-    private void updateFoodByIntent(Food food) {
-        NekoDialog dialog = new NekoDialog(this);
-        dialog.selectFood(food);
-
-        imageView.setImageResource(food.getIcon(this));
-        textView.setText(food.getName(this));
-        closeAppTextView.setVisibility(View.VISIBLE);
-        closeAppTextView.setGravity(Gravity.CENTER_HORIZONTAL);
-    }
-
-    @TargetApi(Build.VERSION_CODES.N_MR1)
-    public void createShortcuts() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
-
-            final PrefState prefs = new PrefState(this);
-            int currentFoodState = prefs.getFoodState();
-            final List<ShortcutInfo> shortcuts = new ArrayList<>();
-            final int mFoodCount = getResources().getStringArray(R.array.food_names).length;
-
-            if (currentFoodState == 0) {
-                for (int i = 1; i < mFoodCount; i++) {
-                    final Food food = new Food(i);
-
-                    final Intent action = new Intent(this, NekoLand.class)
-                        .setAction(Intent.ACTION_VIEW)
-                        .putExtra("action", NekoLand.SHORTCUT_ACTION_SET_FOOD)
-                        .putExtra("food", i);
-
-                    final ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "food" + i)
-                        .setShortLabel(food.getName(this))
-                        .setLongLabel(food.getName(this))
-                        .setIcon(Icon.createWithResource(this, food.getIcon(this)))
-                        .setIntent(action)
-                        .build();
-                    shortcuts.add(shortcut);
-                }
-            } else {
-                // Add current
-                final Food currentFood = new Food(currentFoodState);
-                final Intent currentActionIntent = new Intent(this, NekoLand.class)
-                    .setAction(Intent.ACTION_VIEW)
-                    .putExtra("action", NekoLand.SHORTCUT_ACTION_OPEN_SELECTOR);
-                final ShortcutInfo currentFoodShortcut = new ShortcutInfo.Builder(this, "current")
-                    .setShortLabel(currentFood.getName(this))
-                    .setLongLabel(getString(R.string.current_dish).replace("%s", currentFood.getName(this)))
-                    .setIcon(Icon.createWithResource(this, currentFood.getIcon(this)))
-                    .setIntent(currentActionIntent)
-                    .build();
-                shortcuts.add(currentFoodShortcut);
-            }
-
-            shortcutManager.setDynamicShortcuts(shortcuts);
+            imageView.setImageResource(food.getIcon(this));
+            textView.setText(food.getName(this));
+            closeAppTextView.setVisibility(View.VISIBLE);
+            closeAppTextView.setGravity(Gravity.CENTER_HORIZONTAL);
         }
     }
 
