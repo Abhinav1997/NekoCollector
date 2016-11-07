@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="empty_dish">Пустая миска</string>
-    <string name="about">Описание</string>
-    <string name="about_text">Приложение основано на \"Пасхальном яйце\" Android Nougat и доступно для предыдуших версий Android.</string>
-    <string name="instructions_text">Игра очень проста. Чтобы выбрать корм, нажмите на пустую миску. Теперь ждите, когда кот почувствует запах и прибежит. Собирайте столько уникальных котов, сколько можете!</string>
+    <string name="about">Об игре</string>
+    <string name="about_text">Приложение основано на \"Пасхальном яйце\" Android Nougat и доступно для предыдущих версий Android.</string>
+    <string name="instructions_text">Игра очень проста. Чтобы выбрать корм, нажмите на пустую миску. Теперь ждите, когда кот почувствует запах и прибежит. Соберите столько уникальных котов, сколько сможете!</string>
     <string name="credits">Авторы</string>
     <string name="not_again">Не показывать это снова.</string>
     <string name="close_app">Теперь вы можете закрыть приложение. Кот придёт чуть позже.</string>
