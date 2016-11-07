@@ -46,9 +46,10 @@ public class NekoDialog extends Dialog {
         setContentView(view);
     }
 
-    private void onFoodSelected(Food food) {
+    public void selectFood(Food food) {
         PrefState prefs = new PrefState(getContext());
         int currentState = prefs.getFoodState();
+
         if (currentState == 0 && food.getType() != 0) {
             prefs.setTimeInterval(food.getInterval(getContext()));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -58,11 +59,17 @@ public class NekoDialog extends Dialog {
             }
         }
         prefs.setFoodState(food.getType());
+    }
+
+    private void onFoodSelected(Food food) {
+        selectFood(food);
+
         NekoLand.imageView.setImageResource(food.getIcon(getContext()));
         NekoLand.textView.setText(food.getName(getContext()));
         NekoLand.closeAppTextView.setVisibility(View.VISIBLE);
         NekoLand.closeAppTextView.setGravity(Gravity.CENTER_HORIZONTAL);
         dismiss();
+        new NekoShortcuts(getContext()).updateShortcuts();
     }
 
     private class Adapter extends RecyclerView.Adapter<Holder> {

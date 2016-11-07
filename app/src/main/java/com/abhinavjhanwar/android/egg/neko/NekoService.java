@@ -77,6 +77,7 @@ public class NekoService extends JobService {
         int food = prefs.getFoodState();
         if (food != 0) {
             prefs.setFoodState(0); // nom
+            new NekoShortcuts(this).updateShortcuts();
             final Random rng = new Random();
             if (rng.nextFloat() <= CAT_CAPTURE_PROB) {
                 Cat cat;

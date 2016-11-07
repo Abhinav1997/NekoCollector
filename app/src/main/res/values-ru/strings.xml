@@ -14,4 +14,5 @@
     <string name="cat_notif_return">Ваш кот вернулся.</string>
     <string name="cat_dialog_return_title">Кот вернулся</string>
     <string name="cat_dialog_return_message">Похоже это вернулся Ваш кот. Пробуйте разные виды корма, чтобы приманить новых котов.</string>
+    <string name="current_dish">Сейчас: %s</string>
 </resources>
