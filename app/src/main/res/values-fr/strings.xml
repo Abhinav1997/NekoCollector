@@ -1,29 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-Copyright (C) 2016 The Android Open Source Project
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-         http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
 <resources>
-    <string name="app_name" translatable="false">Neko Collector</string>
-    <string name="default_cat_name" translatable="false">Chat #%s</string>
-    <string name="directory_name" translatable="false">Chats</string>
+    <string name="app_name">Neko Collector</string>
+    <string name="default_cat_name">Chat #%s</string>
+    <string name="directory_name">Chats</string>
     <string name="empty_dish">Coupelle vide</string>
     <string name="about">À propos</string>
     <string name="about_text">Ceci est basé sur l'œuf de pâque dans Android Nougat et mis à disposition pour les anciennes versions d'Android.</string>
     <string name="instructions_text">Le jeu est simple. Cliquez sur le plat vide pour sélectionner un aliment. Attendez qu\'un chat sente la nourriture et vient à vous. Rassemblez autant de chats que vous pouvez!</string>
     <string name="credits">Crédits</string>
-    <string name="aosp" translatable="false">Android Open Source Project</string>
+    <string name="aosp">Android Open Source Project</string>
     <string name="not_again">Ne plus afficher ce message.</string>
     <string name="close_app">Vous pouvez quitter l'application dès maintenant. Un chat viendra bientôt.</string>
     <string name="add_cat">Chat ajouté</string>
