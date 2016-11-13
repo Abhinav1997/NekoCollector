@@ -47,7 +47,7 @@ public class OldService extends Service {
         long intervalMinutes = prefs.getTimeInterval();
         long interval = intervalMinutes * MINUTES;
         long jitter = (long) (INTERVAL_JITTER_FRAC * interval);
-        interval += (long) (Math.random() * (2 * jitter)) - jitter;;
+        interval += (long) (Math.random() * (2 * jitter)) - jitter;
         Log.d(TAG, "A cat will visit in " + interval + "ms: ");
         Runnable mRunnable;
         Handler mHandler = new Handler();
