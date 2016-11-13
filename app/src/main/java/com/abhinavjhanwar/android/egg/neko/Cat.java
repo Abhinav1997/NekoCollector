@@ -36,6 +36,7 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 
 import com.abhinavjhanwar.android.egg.R;
 
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -44,7 +45,7 @@ public class Cat extends Drawable {
 
     private Random mNotSoRandom;
     private Bitmap mBitmap;
-    private final long mSeed;
+    private long mSeed;
     private String mName;
     private int mBodyColor;
 
@@ -141,9 +142,19 @@ public class Cat extends Drawable {
         return (r + g + b) < 0x80;
     }
 
-    public Cat(Context context, long seed) {
+    public Cat(Context context, long seed, List<Cat> mCats) {
         D = new CatParts(context);
         mSeed = seed;
+        for (int i = 0; i < mCats.size(); i++) {
+            while (context.getString(R.string.default_cat_name,
+                    String.valueOf(mSeed).substring(0, 3)).equals(mCats.get(i).getName())) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    mSeed = Math.abs(ThreadLocalRandom.current().nextInt());
+                } else {
+                    mSeed = Math.abs(new Random().nextInt());
+                }
+            }
+        }
 
         setName(context.getString(R.string.default_cat_name,
                 String.valueOf(mSeed).substring(0, 3)));
@@ -195,10 +206,12 @@ public class Cat extends Drawable {
     }
 
     public static Cat create(Context context) {
+        PrefState prefs = new PrefState(context);
+        List<Cat> cats = prefs.getCats();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            return new Cat(context, Math.abs(ThreadLocalRandom.current().nextInt()));
+            return new Cat(context, Math.abs(ThreadLocalRandom.current().nextInt()), cats);
         }
-        return new Cat(context, Math.abs(new Random().nextInt()));
+        return new Cat(context, Math.abs(new Random().nextInt()), cats);
     }
 
     public Notification.Builder buildNotification(Context context) {
