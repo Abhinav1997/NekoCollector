@@ -21,7 +21,6 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,13 +60,12 @@ public class NekoDialog extends Dialog {
         prefs.setFoodState(food.getType());
     }
 
-    private void onFoodSelected(Food food) {
+    private void onFoodSelected(Food food, int position) {
         selectFood(food);
-
-        NekoLand.imageView.setImageResource(food.getIcon(getContext()));
-        NekoLand.textView.setText(food.getName(getContext()));
-        NekoLand.closeAppTextView.setVisibility(View.VISIBLE);
-        NekoLand.closeAppTextView.setGravity(Gravity.CENTER_HORIZONTAL);
+        Intent intent = new Intent(getContext().getApplicationContext(), NekoLand.class)
+                .putExtra("action", NekoLand.SHORTCUT_ACTION_SET_FOOD)
+                .putExtra("food", position + 1);
+        getContext().startActivity(intent);
         dismiss();
         new NekoShortcuts(getContext()).updateShortcuts();
     }
@@ -102,7 +100,7 @@ public class NekoDialog extends Dialog {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onFoodSelected(mFoods.get(holder.getAdapterPosition()));
+                    onFoodSelected(mFoods.get(holder.getAdapterPosition()), holder.getAdapterPosition());
                 }
             });
         }

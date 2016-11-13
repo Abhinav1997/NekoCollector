@@ -73,8 +73,8 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
     private PrefState mPrefs;
     private CatAdapter mAdapter;
     private Cat mPendingShareCat;
-    public static ImageView imageView;
-    public static TextView textView, closeAppTextView;
+    private ImageView imageView;
+    private TextView textView, closeAppTextView;
 
     public static final int SHORTCUT_ACTION_SET_FOOD = 0xf001;
     public static final int SHORTCUT_ACTION_OPEN_SELECTOR = 0xf002;
