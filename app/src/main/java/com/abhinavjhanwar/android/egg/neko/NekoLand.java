@@ -74,7 +74,7 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
     private CatAdapter mAdapter;
     private Cat mPendingShareCat;
     private ImageView imageView;
-    private TextView textView, closeAppTextView;
+    private TextView textView, closeAppTextView, catCountTextView;
 
     public static final int SHORTCUT_ACTION_SET_FOOD = 0xf001;
     public static final int SHORTCUT_ACTION_OPEN_SELECTOR = 0xf002;
@@ -102,6 +102,7 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
         imageView = (ImageView) findViewById(R.id.food_icon);
         textView = (TextView) findViewById(R.id.food);
         closeAppTextView = (TextView) findViewById(R.id.close_app);
+        catCountTextView = (TextView) findViewById(R.id.cat_count);
         recyclerView.setNestedScrollingEnabled(false);
 
         final NekoDialog nekoDialog = new NekoDialog(this);
@@ -275,6 +276,9 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
         private List<Cat> mCats = new ArrayList<>();
 
         public void setCats(List<Cat> cats) {
+            catCountTextView.setText(getString(R.string.cat_count,
+                    String.valueOf(cats.size())));
+            catCountTextView.setVisibility(View.VISIBLE);
             mCats = cats;
             notifyDataSetChanged();
         }
@@ -412,10 +416,10 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        if (mPrefs.getCatReturns() && !mPrefs.getDoNotShow()) {
-            getReturnDialog(this);
-        }
         if (mPrefs.getFoodState() == 0) {
+            if (mPrefs.getCatReturns() && !mPrefs.getDoNotShow()) {
+                getReturnDialog(this);
+            }
             textView.setText(getResources().getString(R.string.empty_dish));
             imageView.setImageResource(R.drawable.food_dish);
             closeAppTextView.setVisibility(View.GONE);
