@@ -147,14 +147,14 @@ public class Cat extends Drawable {
         mSeed = seed;
         long check = seed;
         for (int i = 0; i < mCats.size(); i++) {
-                while (context.getString(R.string.default_cat_name,
-                        String.valueOf(check).substring(0, 3)).equals(mCats.get(i).getName())) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        check = Math.abs(ThreadLocalRandom.current().nextInt());
-                    } else {
-                        check = Math.abs(new Random().nextInt());
-                    }
+            while (context.getString(R.string.default_cat_name,
+                    String.valueOf(check).substring(0, 3)).equals(mCats.get(i).getName())) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    check = Math.abs(ThreadLocalRandom.current().nextInt());
+                } else {
+                    check = Math.abs(new Random().nextInt());
                 }
+            }
         }
 
         setName(context.getString(R.string.default_cat_name,
