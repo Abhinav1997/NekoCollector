@@ -14,56 +14,75 @@ Copyright (C) 2016 The Android Open Source Project
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/catScollView"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainview"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/catLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <include android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
-        <include android:id="@+id/toolbar"
-            layout="@layout/toolbar" />
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/catScollView"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
 
-        <ImageView
-            android:id="@+id/food_icon"
-            android:src="@drawable/food_dish"
-            android:layout_marginTop="72dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
-
-        <TextView
-            android:id="@+id/food"
-            android:textSize="20sp"
-            android:text="@string/empty_dish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/food_icon" />
-
-        <TextView
-            android:id="@+id/close_app"
-            android:textSize="18sp"
-            android:visibility="gone"
-            android:layout_marginTop="8dp"
-            android:text="@string/close_app"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/food" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/holder"
-            android:layout_below="@id/close_app"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
+        <RelativeLayout
+            android:id="@+id/catLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_height="wrap_content">
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/food_icon"
+                android:src="@drawable/food_dish"
+                android:layout_marginTop="72dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
 
-</android.support.v4.widget.NestedScrollView>
+            <TextView
+                android:id="@+id/food"
+                android:textSize="20sp"
+                android:text="@string/empty_dish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/food_icon" />
+
+            <TextView
+                android:id="@+id/close_app"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:layout_marginTop="8dp"
+                android:text="@string/close_app"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/food" />
+
+            <TextView
+                android:id="@+id/cat_count"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/close_app" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/holder"
+                android:layout_below="@id/cat_count"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"/>
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="empty_dish">Coupelle vide</string>
+    <string name="about">À propos</string>
+    <string name="about_text">Ceci est basé sur l\'œuf de pâque dans Android Nougat et mis à disposition pour les anciennes versions d\'Android.</string>
+    <string name="instructions_text">Le jeu est simple. Cliquez sur le plat vide pour sélectionner un aliment. Attendez qu\'un chat sente la nourriture et vient à vous. Rassemblez autant de chats que vous pouvez!</string>
+    <string name="credits">Crédits</string>
+    <string name="not_again">Ne plus afficher ce message.</string>
+    <string name="close_app">Vous pouvez quitter l\'application dès maintenant. Un chat viendra bientôt.</string>
+    <string name="add_cat">Chat ajouté</string>
+    <string name="remove_cat">Voulez-vous supprimer ce chat?</string>
+    <string name="cat_notif_default">Un chat est ici.</string>
+    <string name="cat_notif_new">Un nouveau chat est ici.</string>
+    <string name="cat_notif_return">Un chat est revenu.</string>
+    <string name="cat_dialog_return_title">Un chat est revenu</string>
+    <string name="cat_dialog_return_message">On dirait qu\'un ancien chat est revenu. Essayez différents aliments pour obtenir des chats uniques.</string>
+    <string name="current_dish">Actuel: %s</string>
+</resources>

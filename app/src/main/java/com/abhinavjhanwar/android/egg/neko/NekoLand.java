@@ -36,6 +36,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -72,9 +73,12 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
     private PrefState mPrefs;
     private CatAdapter mAdapter;
     private Cat mPendingShareCat;
-    public static ImageView imageView;
-    public static TextView textView, closeAppTextView;
+    private ImageView imageView;
+    private TextView textView, closeAppTextView, catCountTextView;
 
+    public static final int SHORTCUT_ACTION_SET_FOOD = 0xf001;
+    public static final int SHORTCUT_ACTION_OPEN_SELECTOR = 0xf002;
+    public static final int SHORTCUT_ACTION_SET_FOOD_EMPTY = 0xf003;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -93,14 +97,18 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
 
         mPrefs = new PrefState(this);
         mPrefs.setListener(this);
+
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.holder);
         imageView = (ImageView) findViewById(R.id.food_icon);
         textView = (TextView) findViewById(R.id.food);
         closeAppTextView = (TextView) findViewById(R.id.close_app);
+        catCountTextView = (TextView) findViewById(R.id.cat_count);
         recyclerView.setNestedScrollingEnabled(false);
+
         final NekoDialog nekoDialog = new NekoDialog(this);
         final int[] foodState = {mPrefs.getFoodState()};
         Food food = new Food(foodState[0]);
+
         textView.setText(food.getName(this));
         imageView.setImageResource(food.getIcon(this));
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -118,11 +126,15 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
                 }
             }
         });
+
         mAdapter = new CatAdapter();
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         updateCats();
         recyclerView.setFocusable(false);
+
+        handleShortcutIntent(getIntent());
+        new NekoShortcuts(this).updateShortcuts();
     }
 
     @Override
@@ -162,12 +174,37 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
         Collections.sort(cats, new Comparator<Cat>() {
             @Override
             public int compare(Cat cat, Cat t1) {
-                return  cat.getName().compareTo(t1.getName());
+                return cat.getName().compareTo(t1.getName());
             }
         });
         mAdapter.setCats(cats);
 
         if (mPrefs.getFoodState() == 0) {
+            textView.setText(getResources().getString(R.string.empty_dish));
+            imageView.setImageResource(R.drawable.food_dish);
+            closeAppTextView.setVisibility(View.GONE);
+            new NekoShortcuts(this).updateShortcuts();
+        }
+    }
+
+    private void handleShortcutIntent(Intent intent) {
+        int intentAction = intent.getIntExtra("action", 0);
+
+        if (intentAction == SHORTCUT_ACTION_OPEN_SELECTOR) {
+            NekoDialog dialog = new NekoDialog(this);
+            dialog.show();
+        } else if (intentAction == SHORTCUT_ACTION_SET_FOOD) {
+            final Food food = new Food(intent.getIntExtra("food", 0));
+            NekoDialog dialog = new NekoDialog(this);
+            dialog.selectFood(food);
+            new NekoShortcuts(this).updateShortcuts();
+
+            imageView.setImageResource(food.getIcon(this));
+            textView.setText(food.getName(this));
+            closeAppTextView.setVisibility(View.VISIBLE);
+            closeAppTextView.setGravity(Gravity.CENTER_HORIZONTAL);
+        } else if (intentAction == SHORTCUT_ACTION_SET_FOOD_EMPTY) {
+            mPrefs.setFoodState(0);
             textView.setText(getResources().getString(R.string.empty_dish));
             imageView.setImageResource(R.drawable.food_dish);
             closeAppTextView.setVisibility(View.GONE);
@@ -197,8 +234,8 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
             context = new ContextThemeWrapper(this,
                     android.R.style.Theme_Material_Light_Dialog_NoActionBar);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                context = new ContextThemeWrapper(this,
-                        android.R.style.Theme_Holo_Dialog_NoActionBar);
+            context = new ContextThemeWrapper(this,
+                    android.R.style.Theme_Holo_Dialog_NoActionBar);
         } else {
             context = new ContextThemeWrapper(this,
                     android.R.style.Theme_Dialog);
@@ -239,6 +276,9 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
         private List<Cat> mCats = new ArrayList<>();
 
         public void setCats(List<Cat> cats) {
+            catCountTextView.setText(getString(R.string.cat_count,
+                    String.valueOf(cats.size())));
+            catCountTextView.setVisibility(View.VISIBLE);
             mCats = cats;
             notifyDataSetChanged();
         }
@@ -347,8 +387,8 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
                 os.close();
                 MediaScannerConnection.scanFile(
                         this,
-                        new String[] {png.toString()},
-                        new String[] {"image/png"},
+                        new String[]{png.toString()},
+                        new String[]{"image/png"},
                         null);
                 Uri uri = Uri.fromFile(png);
                 Intent intent = new Intent(Intent.ACTION_SEND);
@@ -376,14 +416,15 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        if (mPrefs.getCatReturns() && !mPrefs.getDoNotShow()) {
-            getReturnDialog(this);
-        }
-        if(mPrefs.getFoodState() == 0) {
+        if (mPrefs.getFoodState() == 0) {
+            if (mPrefs.getCatReturns() && !mPrefs.getDoNotShow()) {
+                getReturnDialog(this);
+            }
             textView.setText(getResources().getString(R.string.empty_dish));
             imageView.setImageResource(R.drawable.food_dish);
             closeAppTextView.setVisibility(View.GONE);
         }
+        handleShortcutIntent(intent);
     }
 
     private void getReturnDialog(Context context) {
@@ -394,7 +435,7 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
+                if (isChecked) {
                     mPrefs.setDoNotShow(true);
                 } else {
                     mPrefs.setDoNotShow(false);
@@ -406,7 +447,7 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
                 .setMessage(getString(R.string.cat_dialog_return_message))
                 .setPositiveButton(getString(android.R.string.ok), null)
                 .create();
-        dialog.setView(checkBoxView, (int)(19*dpi), (int)(5*dpi), (int)(14*dpi), (int)(5*dpi));
+        dialog.setView(checkBoxView, (int) (19 * dpi), (int) (5 * dpi), (int) (14 * dpi), (int) (5 * dpi));
         dialog.show();
     }
 

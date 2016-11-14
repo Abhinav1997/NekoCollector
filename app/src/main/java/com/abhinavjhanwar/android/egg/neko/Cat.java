@@ -36,6 +36,7 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 
 import com.abhinavjhanwar.android.egg.R;
 
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -44,7 +45,7 @@ public class Cat extends Drawable {
 
     private Random mNotSoRandom;
     private Bitmap mBitmap;
-    private final long mSeed;
+    private long mSeed;
     private String mName;
     private int mBodyColor;
 
@@ -59,23 +60,23 @@ public class Cat extends Drawable {
     private static float frandrange(Random r) {
         float a = 0.5f;
         float b = 1f;
-        return (b-a)*r.nextFloat() + a;
+        return (b - a) * r.nextFloat() + a;
     }
 
-    private static Object choose(Random r, Object...l) {
+    private static Object choose(Random r, Object... l) {
         return l[r.nextInt(l.length)];
     }
 
     private static int chooseP(Random r, int[] a) {
         int pct = r.nextInt(1000);
-        final int stop = a.length-2;
-        int i=0;
-        while (i<stop) {
+        final int stop = a.length - 2;
+        int i = 0;
+        while (i < stop) {
             pct -= a[i];
             if (pct < 0) break;
-            i+=2;
+            i += 2;
         }
-        return a[i+1];
+        return a[i + 1];
     }
 
     private static final int[] P_BODY_COLORS = {
@@ -86,22 +87,22 @@ public class Cat extends Drawable {
             100, 0xFF90A4AE, // steel
             100, 0xFFFFF9C4, // buff
             100, 0xFFFF8F00, // orange
-              5, 0xFF29B6F6, // blue..?
-              5, 0xFFFFCDD2, // pink!?
-              5, 0xFFCE93D8, // purple?!?!?
-              4, 0xFF43A047, // yeah, why not green
-              1, 0,          // ?!?!?!
+            5, 0xFF29B6F6, // blue..?
+            5, 0xFFFFCDD2, // pink!?
+            5, 0xFFCE93D8, // purple?!?!?
+            4, 0xFF43A047, // yeah, why not green
+            1, 0,          // ?!?!?!
     };
 
     private static final int[] P_COLLAR_COLORS = {
             250, 0xFFFFFFFF,
             250, 0xFF000000,
             250, 0xFFF44336,
-             50, 0xFF1976D2,
-             50, 0xFFFDD835,
-             50, 0xFFFB8C00,
-             50, 0xFFF48FB1,
-             50, 0xFF4CAF50,
+            50, 0xFF1976D2,
+            50, 0xFFFDD835,
+            50, 0xFFFB8C00,
+            50, 0xFFF48FB1,
+            50, 0xFF4CAF50,
     };
 
     private static final int[] P_BELLY_COLORS = {
@@ -112,7 +113,7 @@ public class Cat extends Drawable {
     private static final int[] P_DARK_SPOT_COLORS = {
             700, 0,
             250, 0xFF212121,
-             50, 0xFF6D4C41,
+            50, 0xFF6D4C41,
     };
 
     private static final int[] P_LIGHT_SPOT_COLORS = {
@@ -122,7 +123,7 @@ public class Cat extends Drawable {
 
     private final CatParts D;
 
-    private static void tint(int color, Drawable ... ds) {
+    private static void tint(int color, Drawable... ds) {
         for (Drawable d : ds) {
             if (d != null) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -141,9 +142,19 @@ public class Cat extends Drawable {
         return (r + g + b) < 0x80;
     }
 
-    public Cat(Context context, long seed) {
+    public Cat(Context context, long seed, List<Cat> mCats) {
         D = new CatParts(context);
         mSeed = seed;
+        for (int i = 0; i < mCats.size(); i++) {
+            while (context.getString(R.string.default_cat_name,
+                    String.valueOf(mSeed).substring(0, 3)).equals(mCats.get(i).getName())) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    mSeed = Math.abs(ThreadLocalRandom.current().nextInt());
+                } else {
+                    mSeed = Math.abs(new Random().nextInt());
+                }
+            }
+        }
 
         setName(context.getString(R.string.default_cat_name,
                 String.valueOf(mSeed).substring(0, 3)));
@@ -152,8 +163,8 @@ public class Cat extends Drawable {
 
         // body color
         mBodyColor = chooseP(nsr, P_BODY_COLORS);
-        if (mBodyColor == 0) mBodyColor = Color.HSVToColor(new float[] {
-                nsr.nextFloat()*360f, frandrange(nsr), frandrange(nsr)});
+        if (mBodyColor == 0) mBodyColor = Color.HSVToColor(new float[]{
+                nsr.nextFloat() * 360f, frandrange(nsr), frandrange(nsr)});
 
         tint(mBodyColor, D.body, D.head, D.leg1, D.leg2, D.leg3, D.leg4, D.tail,
                 D.leftEar, D.rightEar, D.foot1, D.foot2, D.foot3, D.foot4, D.tailCap);
@@ -195,10 +206,12 @@ public class Cat extends Drawable {
     }
 
     public static Cat create(Context context) {
+        PrefState prefs = new PrefState(context);
+        List<Cat> cats = prefs.getCats();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            return new Cat(context, Math.abs(ThreadLocalRandom.current().nextInt()));
+            return new Cat(context, Math.abs(ThreadLocalRandom.current().nextInt()), cats);
         }
-        return new Cat(context, Math.abs(new Random().nextInt()));
+        return new Cat(context, Math.abs(new Random().nextInt()), cats);
     }
 
     public Notification.Builder buildNotification(Context context) {
@@ -268,7 +281,7 @@ public class Cat extends Drawable {
         for (int i = 0; i < D.drawingOrder.length; i++) {
             final Drawable d = D.drawingOrder[i];
             if (d != null) {
-                d.setBounds(x, y, x+w, y+h);
+                d.setBounds(x, y, x + w, y + h);
                 d.draw(canvas);
             }
         }
@@ -294,16 +307,16 @@ public class Cat extends Drawable {
         final Paint pt = new Paint();
         float[] hsv = new float[3];
         Color.colorToHSV(mBodyColor, hsv);
-        hsv[2] = (hsv[2]>0.5f)
+        hsv[2] = (hsv[2] > 0.5f)
                 ? (hsv[2] - 0.25f)
                 : (hsv[2] + 0.25f);
         pt.setColor(Color.HSVToColor(hsv));
         pt.setFlags(Paint.ANTI_ALIAS_FLAG);
-        float r = w/2;
+        float r = w / 2;
         canvas.drawCircle(r, r, r, pt);
-        int m = w/10;
+        int m = w / 10;
 
-        slowDraw(canvas, m, m, w-m-m, h-m-m);
+        slowDraw(canvas, m, m, w - m - m, h - m - m);
 
         return result;
     }
@@ -434,8 +447,9 @@ public class Cat extends Drawable {
             }
             drawingOrder = getDrawingOrder();
         }
+
         private Drawable[] getDrawingOrder() {
-            return new Drawable[] {
+            return new Drawable[]{
                     collar,
                     leftEar, leftEarInside, rightEar, rightEarInside,
                     head,

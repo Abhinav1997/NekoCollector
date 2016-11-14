@@ -21,7 +21,6 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,14 +40,15 @@ public class NekoDialog extends Dialog {
         view.setLayoutManager(new GridLayoutManager(getContext(), 2));
         view.setAdapter(mAdapter);
         final float dp = context.getResources().getDisplayMetrics().density;
-        final int pad = (int)(16*dp);
+        final int pad = (int) (16 * dp);
         view.setPadding(pad, pad, pad, pad);
         setContentView(view);
     }
 
-    private void onFoodSelected(Food food) {
+    public void selectFood(Food food) {
         PrefState prefs = new PrefState(getContext());
         int currentState = prefs.getFoodState();
+
         if (currentState == 0 && food.getType() != 0) {
             prefs.setTimeInterval(food.getInterval(getContext()));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -58,11 +58,16 @@ public class NekoDialog extends Dialog {
             }
         }
         prefs.setFoodState(food.getType());
-        NekoLand.imageView.setImageResource(food.getIcon(getContext()));
-        NekoLand.textView.setText(food.getName(getContext()));
-        NekoLand.closeAppTextView.setVisibility(View.VISIBLE);
-        NekoLand.closeAppTextView.setGravity(Gravity.CENTER_HORIZONTAL);
+    }
+
+    private void onFoodSelected(Food food, int position) {
+        selectFood(food);
+        Intent intent = new Intent(getContext().getApplicationContext(), NekoLand.class)
+                .putExtra("action", NekoLand.SHORTCUT_ACTION_SET_FOOD)
+                .putExtra("food", position + 1);
+        getContext().startActivity(intent);
         dismiss();
+        new NekoShortcuts(getContext()).updateShortcuts();
     }
 
     private class Adapter extends RecyclerView.Adapter<Holder> {
@@ -74,7 +79,7 @@ public class NekoDialog extends Dialog {
             mContext = context;
             int[] foods = context.getResources().getIntArray(R.array.food_names);
             // skip food 0, you can't choose it
-            for (int i=1; i<foods.length; i++) {
+            for (int i = 1; i < foods.length; i++) {
                 mFoods.add(new Food(i));
             }
         }
@@ -95,7 +100,7 @@ public class NekoDialog extends Dialog {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onFoodSelected(mFoods.get(holder.getAdapterPosition()));
+                    onFoodSelected(mFoods.get(holder.getAdapterPosition()), holder.getAdapterPosition());
                 }
             });
         }

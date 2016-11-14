@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="empty_dish">Pusty talerz</string>
+    <string name="about">O autorze</string>
+    <string name="about_text">Aplikacja jest bazowana na Easter eggu w Androidzie Nougat i udostępniona dla starszych wersji Androida.</string>
+    <string name="instructions_text">Gra jest prosta. Naciśnij na pusty talerz żeby wybrać jedzenie. Potem czekaj aż kot wyczuje jedzenie i do Ciebie przyjdzie. Zbierz tak wiele unikalnych kotów jak Ci się uda!</string>
+    <string name="credits">O autorach</string>
+    <string name="not_again">Nie pokazuj tego więcej.</string>
+    <string name="close_app">Możesz teraz zamknąć aplikację. Kot wkrótce przyjdzie.</string>
+    <string name="add_cat">Kot dodany</string>
+    <string name="remove_cat">Czy chcesz usunąć tego kota?</string>
+    <string name="cat_notif_default">Kot przyszedł.</string>
+    <string name="cat_notif_new">Nowy kot przyszedł.</string>
+    <string name="cat_notif_return">Kot wrócił.</string>
+    <string name="cat_dialog_return_title">Kot wrócił</string>
+    <string name="cat_dialog_return_message">Wygląda na to, że stary kot wrócił. Spróbuj użyć innego jedzenia aby zdobyć unikalne futrzaki.</string>
+</resources>
