@@ -40,7 +40,7 @@ public class NekoDialog extends Dialog {
         view.setLayoutManager(new GridLayoutManager(getContext(), 2));
         view.setAdapter(mAdapter);
         final float dp = context.getResources().getDisplayMetrics().density;
-        final int pad = (int)(16*dp);
+        final int pad = (int) (16 * dp);
         view.setPadding(pad, pad, pad, pad);
         setContentView(view);
     }
@@ -79,7 +79,7 @@ public class NekoDialog extends Dialog {
             mContext = context;
             int[] foods = context.getResources().getIntArray(R.array.food_names);
             // skip food 0, you can't choose it
-            for (int i=1; i<foods.length; i++) {
+            for (int i = 1; i < foods.length; i++) {
                 mFoods.add(new Food(i));
             }
         }

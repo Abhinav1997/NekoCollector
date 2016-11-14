@@ -68,8 +68,8 @@ public class NekoService extends JobService {
             final Cat cat = Cat.create(this);
             final Notification.Builder builder
                     = cat.buildNotification(this)
-                        .setContentTitle("DEBUG")
-                        .setContentText("Ran job: " + params);
+                    .setContentTitle("DEBUG")
+                    .setContentText("Ran job: " + params);
             noman.notify(1, builder.build());
         }
 
@@ -83,7 +83,7 @@ public class NekoService extends JobService {
                 Cat cat;
                 List<Cat> cats = prefs.getCats();
                 final int[] probs = getResources().getIntArray(R.array.food_new_cat_prob);
-                final float new_cat_prob = (float)((food < probs.length) ? probs[food] : 50) / 100f;
+                final float new_cat_prob = (float) ((food < probs.length) ? probs[food] : 50) / 100f;
 
                 if (cats.size() == 0 || rng.nextFloat() <= new_cat_prob) {
                     cat = Cat.create(this);
@@ -120,13 +120,22 @@ public class NekoService extends JobService {
         }
         jss.cancel(JOB_ID);
         long interval = intervalMinutes * MINUTES;
-        long jitter = (long)(INTERVAL_JITTER_FRAC * interval);
-        interval += (long)(Math.random() * (2 * jitter)) - jitter;
+        long jitter = (long) (INTERVAL_JITTER_FRAC * interval);
+        interval += (long) (Math.random() * (2 * jitter)) - jitter;
 
-        final JobInfo jobInfo = new JobInfo.Builder(JOB_ID,
-                new ComponentName(context, NekoService.class))
-                .setMinimumLatency(interval)
-                .build();
+        final JobInfo jobInfo;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            jobInfo = new JobInfo.Builder(JOB_ID,
+                    new ComponentName(context, NekoService.class))
+                    .setMinimumLatency(interval)
+                    .build();
+        } else {
+            jobInfo = new JobInfo.Builder(JOB_ID,
+                    new ComponentName(context, NekoService.class))
+                    .setPeriodic(interval)
+                    .build();
+        }
 
         Log.v(TAG, "A cat will visit in " + interval + "ms: " + String.valueOf(jobInfo));
         jss.schedule(jobInfo);

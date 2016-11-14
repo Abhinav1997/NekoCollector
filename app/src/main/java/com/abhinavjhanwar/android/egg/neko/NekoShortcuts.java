@@ -37,7 +37,7 @@ import java.util.List;
  */
 
 public class NekoShortcuts {
-    private Context mContext;
+    private final Context mContext;
 
     public NekoShortcuts(Context context) {
         mContext = context;

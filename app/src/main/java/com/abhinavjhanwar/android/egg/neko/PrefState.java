@@ -48,8 +48,8 @@ class PrefState implements OnSharedPreferenceChangeListener {
     // Can also be used for renaming.
     public void addCat(Cat cat) {
         mPrefs.edit()
-              .putString(CAT_KEY_PREFIX + String.valueOf(cat.getSeed()), cat.getName())
-              .apply();
+                .putString(CAT_KEY_PREFIX + String.valueOf(cat.getSeed()), cat.getName())
+                .apply();
     }
 
     public void removeCat(Cat cat) {
