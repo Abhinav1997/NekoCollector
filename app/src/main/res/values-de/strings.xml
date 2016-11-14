@@ -12,6 +12,8 @@
     <string name="cat_notif_default">Eine Katze ist da.</string>
     <string name="cat_notif_new">Eine neue Katze ist da.</string>
     <string name="cat_notif_return">Eine Katze ist zurückgekehrt.</string>
+    <string name="current_dish">Jetzt Gerade: %s</string>
+    <string name="cat_count">Gefundene Katzen: %s</string>
     <string name="cat_dialog_return_title">Eine Katze ist zurückgekehrt</string>
     <string name="cat_dialog_return_message">Sieht so aus als ob eine bereits gesammelte Katze zurückgekehrt ist. Versuche ein anderes Futter, um andere Katzen anzulocken.</string>
 </resources>
