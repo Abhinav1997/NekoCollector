@@ -25,6 +25,7 @@ Copyright (C) 2016 The Android Open Source Project
 
     <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/catScollView"
+        android:layout_below="@id/toolbar"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
 
@@ -36,7 +37,6 @@ Copyright (C) 2016 The Android Open Source Project
             <ImageView
                 android:id="@+id/food_icon"
                 android:src="@drawable/food_dish"
-                android:layout_marginTop="72dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
