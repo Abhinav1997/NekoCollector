@@ -37,6 +37,7 @@ Copyright (C) 2016 The Android Open Source Project
             <ImageView
                 android:id="@+id/food_icon"
                 android:src="@drawable/food_dish"
+                android:layout_marginTop="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -52,17 +53,6 @@ Copyright (C) 2016 The Android Open Source Project
                 android:layout_below="@id/food_icon" />
 
             <TextView
-                android:id="@+id/close_app"
-                android:textSize="18sp"
-                android:visibility="gone"
-                android:layout_marginTop="8dp"
-                android:text="@string/close_app"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/food" />
-
-            <TextView
                 android:id="@+id/cat_count"
                 android:textSize="18sp"
                 android:visibility="gone"
@@ -71,7 +61,7 @@ Copyright (C) 2016 The Android Open Source Project
                 android:layout_marginLeft="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/close_app" />
+                android:layout_below="@id/food" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/holder"

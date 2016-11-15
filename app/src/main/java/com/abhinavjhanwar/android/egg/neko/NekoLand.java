@@ -36,7 +36,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -74,7 +73,7 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
     private CatAdapter mAdapter;
     private Cat mPendingShareCat;
     private ImageView imageView;
-    private TextView textView, closeAppTextView, catCountTextView;
+    private TextView textView, catCountTextView;
 
     public static final int SHORTCUT_ACTION_SET_FOOD = 0xf001;
     public static final int SHORTCUT_ACTION_OPEN_SELECTOR = 0xf002;
@@ -101,7 +100,6 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.holder);
         imageView = (ImageView) findViewById(R.id.food_icon);
         textView = (TextView) findViewById(R.id.food);
-        closeAppTextView = (TextView) findViewById(R.id.close_app);
         catCountTextView = (TextView) findViewById(R.id.cat_count);
         recyclerView.setNestedScrollingEnabled(false);
 
@@ -122,7 +120,6 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
                     mPrefs.setFoodState(0);
                     textView.setText(getResources().getString(R.string.empty_dish));
                     imageView.setImageResource(R.drawable.food_dish);
-                    closeAppTextView.setVisibility(View.GONE);
                 }
             }
         });
@@ -182,7 +179,6 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
         if (mPrefs.getFoodState() == 0) {
             textView.setText(getResources().getString(R.string.empty_dish));
             imageView.setImageResource(R.drawable.food_dish);
-            closeAppTextView.setVisibility(View.GONE);
             new NekoShortcuts(this).updateShortcuts();
         }
     }
@@ -201,13 +197,14 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
 
             imageView.setImageResource(food.getIcon(this));
             textView.setText(food.getName(this));
-            closeAppTextView.setVisibility(View.VISIBLE);
-            closeAppTextView.setGravity(Gravity.CENTER_HORIZONTAL);
+
+            if (!mPrefs.getDoNotShowFood()) {
+                getFoodDialog(NekoLand.this);
+            }
         } else if (intentAction == SHORTCUT_ACTION_SET_FOOD_EMPTY) {
             mPrefs.setFoodState(0);
             textView.setText(getResources().getString(R.string.empty_dish));
             imageView.setImageResource(R.drawable.food_dish);
-            closeAppTextView.setVisibility(View.GONE);
         }
     }
 
@@ -422,7 +419,6 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
             }
             textView.setText(getResources().getString(R.string.empty_dish));
             imageView.setImageResource(R.drawable.food_dish);
-            closeAppTextView.setVisibility(View.GONE);
         }
         handleShortcutIntent(intent);
     }
@@ -445,6 +441,30 @@ public class NekoLand extends AppCompatActivity implements PrefState.PrefsListen
         AlertDialog dialog = new AlertDialog.Builder(context)
                 .setTitle(getString(R.string.cat_dialog_return_title))
                 .setMessage(getString(R.string.cat_dialog_return_message))
+                .setPositiveButton(getString(android.R.string.ok), null)
+                .create();
+        dialog.setView(checkBoxView, (int) (19 * dpi), (int) (5 * dpi), (int) (14 * dpi), (int) (5 * dpi));
+        dialog.show();
+    }
+
+    private void getFoodDialog(Context context) {
+        View checkBoxView = View.inflate(this, R.layout.checkbox_food, null);
+        CheckBox checkBox = (CheckBox) checkBoxView.findViewById(R.id.skip_dialog_food);
+        float dpi = context.getResources().getDisplayMetrics().density;
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mPrefs.setDoNotShowFood(true);
+                } else {
+                    mPrefs.setDoNotShowFood(false);
+                }
+            }
+        });
+        AlertDialog dialog = new AlertDialog.Builder(context)
+                .setTitle(getString(R.string.close_app_dialog_title))
+                .setMessage(getString(R.string.close_app))
                 .setPositiveButton(getString(android.R.string.ok), null)
                 .create();
         dialog.setView(checkBoxView, (int) (19 * dpi), (int) (5 * dpi), (int) (14 * dpi), (int) (5 * dpi));
