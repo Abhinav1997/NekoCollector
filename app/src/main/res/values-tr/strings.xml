@@ -2,18 +2,18 @@
 <resources>
     <string name="empty_dish">Boş Tabak</string>
     <string name="about">Hakkında</string>
-    <string name="about_text">Bu uygulama Android Nougat\'ın Easter Egg\'ini baz alarak eski Android versiyonlarındada olmasını sağlar.</string>
-    <string name="instructions_text">Oyun basittir. Yiyecek seçmek için boş tabağa basın. Ardından yemeğin kokusunu alıp size gelecek bir kediyi bekleyin. Ve toplayabileceğiniz kadar benzersiz kedi toplayın.</string>
+    <string name="about_text">Bu uygulama: Android Nougat\'ın Easter Egg\'inin; eski Android sürümlerinde çalışmasını sağlar.</string>
+    <string name="instructions_text">Oyun basittir, yiyecek seçmek için boş tabağa basın, ardından yemeğin kokusunu alıp size gelecek olan kediyi bekleyin ve toplayabildiğiniz kadar benzersiz kedi toplamaya çalışın.</string>
     <string name="credits">Krediler</string>
-    <string name="not_again">Bunu birdaha gösterme.</string>
-    <string name="close_app">Şimdi uygulamadan çıkabilirsin. Bir kedi yakında gelecektir.</string>
-    <string name="add_cat">Kedi eklendi</string>
+    <string name="not_again">Bunu birdaha gösterme!</string>
+    <string name="close_app">Uygulamadan çıkabilirsin. Bir kedi yakında gelecektir.</string>
+    <string name="add_cat">Kedi eklendi!</string>
     <string name="remove_cat">Bu kediyi silmek istediğinden emin misin?</string>
-    <string name="cat_notif_default">Bir kedi geldi.</string>
-    <string name="cat_notif_new">Yeni bir kedi geldi.</string>
-    <string name="cat_notif_return">Bir kedi geri döndü.</string>
-    <string name="cat_dialog_return_title">Bir kedi geri döndü</string>
-    <string name="cat_dialog_return_message">Görünüşe bakılırsa eski bir kedi geri döndü. Daha benzersiz kedileri bulmak için farklı bir yiyecek dene.</string>
+    <string name="cat_notif_default">Bir kedi geldi!</string>
+    <string name="cat_notif_new">Yeni bir kedi geldi!</string>
+    <string name="cat_notif_return">Bir kedi geri döndü!</string>
+    <string name="cat_dialog_return_title">Bir kedi geri döndü!</string>
+    <string name="cat_dialog_return_message">Görünüşe bakılırsa; eski bir kedi geri döndü. Benzersiz kediler bulmak için farklı bir yiyecek dene.</string>
     <string name="current_dish">Şu anki: %s</string>
     <string name="cat_count">Bulunan Kediler: %s</string>
 </resources>
