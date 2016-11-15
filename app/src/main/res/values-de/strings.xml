@@ -6,6 +6,7 @@
     <string name="instructions_text">Das Spiel ist einfach. Klicke auf die leere Schüssel um neues Futter zu geben. Warte jetzt bis eine Katze das Futter riecht und zu dir kommt. Sammle so viele verschiedene Katzen wie möglich!</string>
     <string name="credits">Credits</string>
     <string name="not_again">Nicht mehr anzeigen.</string>
+    <string name="close_app_dialog_title">App beenden</string>
     <string name="close_app">Du kannst jetzt die App verlassen, eine neue Katze erscheint bald.</string>
     <string name="add_cat">Katze hinzugefügt</string>
     <string name="remove_cat">Willst du diese Katze entfernen?</string>
@@ -14,6 +15,6 @@
     <string name="cat_notif_return">Eine Katze ist zurückgekehrt.</string>
     <string name="cat_dialog_return_title">Eine Katze ist zurückgekehrt</string>
     <string name="cat_dialog_return_message">Sieht so aus als ob eine bereits gesammelte Katze zurückgekehrt ist. Versuche ein anderes Futter, um andere Katzen anzulocken.</string>
-    <string name="current_dish">Jetzt Gerade: %s</string>
+    <string name="current_dish">Aktuell: %s</string>
     <string name="cat_count">Gefundene Katzen: %s</string>
 </resources>

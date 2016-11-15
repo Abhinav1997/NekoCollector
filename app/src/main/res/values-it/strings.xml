@@ -6,6 +6,7 @@
     <string name="instructions_text">Questo gioco è molto semplice. Clicca sulla ciotola vuota e seleziona uno tra i cibi disponibili. Poi aspetta che un gatto senta l\'odore e verrà da te. Colleziona quanti più gatti unici puoi!</string>
     <string name="credits">Crediti</string>
     <string name="not_again">Non mostrare di nuovo.</string>
+    <string name="close_app_dialog_title">Esci dall\'app</string>
     <string name="close_app">Puoi uscire dall\'app adesso. Un gatto arriverà presto.</string>
     <string name="add_cat">Gatto aggiunto</string>
     <string name="remove_cat">Vuoi davvero rimuovere questo gatto?</string>
@@ -14,4 +15,6 @@
     <string name="cat_notif_return">Un gatto è ritornato.</string>
     <string name="cat_dialog_return_title">Un gatto è ritornato</string>
     <string name="cat_dialog_return_message">Sembra che un gatto che hai già visto sia ritornato. Prova diversi tipi di cibo per avere gatti unici.</string>
+    <string name="current_dish">Attuale: %s</string>
+    <string name="cat_count">Gattini trovati: %s</string>
 </resources>

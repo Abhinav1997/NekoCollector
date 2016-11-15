@@ -6,6 +6,7 @@
     <string name="instructions_text">Gra jest prosta. Naciśnij na pusty talerz żeby wybrać jedzenie. Potem czekaj aż kot wyczuje jedzenie i do Ciebie przyjdzie. Zbierz tak wiele unikalnych kotów jak Ci się uda!</string>
     <string name="credits">O autorach</string>
     <string name="not_again">Nie pokazuj tego więcej.</string>
+    <string name="close_app_dialog_title">Zamknij aplikację</string>
     <string name="close_app">Możesz teraz zamknąć aplikację. Kot wkrótce przyjdzie.</string>
     <string name="add_cat">Kot dodany</string>
     <string name="remove_cat">Czy chcesz usunąć tego kota?</string>
@@ -14,4 +15,6 @@
     <string name="cat_notif_return">Kot wrócił.</string>
     <string name="cat_dialog_return_title">Kot wrócił</string>
     <string name="cat_dialog_return_message">Wygląda na to, że stary kot wrócił. Spróbuj użyć innego jedzenia aby zdobyć unikalne futrzaki.</string>
+    <string name="current_dish">Naczynie: %s</string>
+    <string name="cat_count">Znalezione koty: %s</string>
 </resources>
