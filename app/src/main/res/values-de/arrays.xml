@@ -2,9 +2,9 @@
 <resources>
     <string-array name="food_names">
         <item>Leere Schüssel</item>
-        <item>Trocken Futter</item>
+        <item>Häppchen</item>
         <item>Fisch</item>
         <item>Huhn</item>
-        <item>Süßigkeiten</item>
+        <item>Süßigkeit</item>
     </string-array>
 </resources>

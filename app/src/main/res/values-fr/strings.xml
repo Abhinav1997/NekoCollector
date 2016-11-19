@@ -6,6 +6,7 @@
     <string name="instructions_text">Le jeu est simple. Cliquez sur le plat vide pour sélectionner un aliment. Attendez qu\'un chat sente la nourriture et vient à vous. Rassemblez autant de chats que vous pouvez!</string>
     <string name="credits">Crédits</string>
     <string name="not_again">Ne plus afficher ce message.</string>
+    <string name="close_app_dialog_title">Quitter l\'application</string>
     <string name="close_app">Vous pouvez quitter l\'application dès maintenant. Un chat viendra bientôt.</string>
     <string name="add_cat">Chat ajouté</string>
     <string name="remove_cat">Voulez-vous supprimer ce chat?</string>
@@ -15,4 +16,5 @@
     <string name="cat_dialog_return_title">Un chat est revenu</string>
     <string name="cat_dialog_return_message">On dirait qu\'un ancien chat est revenu. Essayez différents aliments pour obtenir des chats uniques.</string>
     <string name="current_dish">Actuel: %s</string>
+    <string name="cat_count">Chats trouvés: %s</string>
 </resources>
