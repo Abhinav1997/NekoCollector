@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingTranslation">
-    <string name="app_name" >Neko Collector</string>
-    <string name="default_cat_name" >貓 #%s</string>
-    <string name="directory_name" >貓</string>
     <string name="empty_dish">空盤</string>
     <string name="about">關於</string>
     <string name="about_text">這是基於安卓牛軋糖的復活節彩蛋開發的，而且舊的安卓版本可以使用。</string>
@@ -41,4 +38,5 @@
         <item>70</item>
         <item>90</item>
     </integer-array>
+    <string name="credits">作者</string>
 </resources>
