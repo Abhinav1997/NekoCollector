@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="food_names">
+        <item>空盤</item>
+        <item>零碎食物</item>
+        <item>魚</item>
+        <item>雞肉</item>
+        <item>貓點心</item>
+    </string-array>
+</resources>
