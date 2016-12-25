@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+    <string name="app_name" >Neko Collector</string>
+    <string name="default_cat_name" >貓 #%s</string>
+    <string name="directory_name" >貓</string>
+    <string name="empty_dish">空盤</string>
+    <string name="about">關於</string>
+    <string name="about_text">這是基於安卓牛軋糖的復活節彩蛋開發的，而且舊的安卓版本可以使用。</string>
+    <string name="instructions_text">這個遊戲很簡單，點擊空盤來選擇食物，然後等待壹只貓聞到食物來找妳，收集盡可能許多獨特的貓!</string>
+    <string name="credits">製作者</string>
+    <string name="aosp" >安卓開源項目</string>
+    <string name="not_again">不再顯示。</string>
+    <string name="close_app_dialog_title">退出應用</string>
+    <string name="close_app">你現在可以退出，貓很快會來找你。</string>
+    <string name="add_cat">貓已添加</string>
+    <string name="remove_cat">你確定要添加這隻貓？</string>
+    <string name="cat_notif_default">一隻貓來了。</string>
+    <string name="cat_notif_new">一隻新的貓來了。</string>
+    <string name="cat_notif_return">一隻貓已經走了。</string>
+    <string name="cat_dialog_return_title">一隻貓走了。</string>
+    <string name="cat_dialog_return_message">一隻已經出現過的貓又來了，嘗試用不同的食物來獲得新的貓。</string>
+    <string name="current_dish">當前的: %s</string>
+    <string name="cat_count">已發現的貓: %s</string>
+    <array name="food_icons">
+        <item>@drawable/food_dish</item>
+        <item>@drawable/food_bits</item>
+        <item>@drawable/food_sysuituna</item>
+        <item>@drawable/food_chicken</item>
+        <item>@drawable/food_donut</item>
+    </array>
+    <integer-array name="food_intervals">
+        <item>0</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>120</item>
+    </integer-array>
+    <integer-array name="food_new_cat_prob">
+        <item>0</item>
+        <item>30</item>
+        <item>50</item>
+        <item>70</item>
+        <item>90</item>
+    </integer-array>
+</resources>
