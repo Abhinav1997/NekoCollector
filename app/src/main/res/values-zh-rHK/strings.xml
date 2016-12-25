@@ -13,7 +13,7 @@
     <string name="cat_notif_default">一隻貓來了。</string>
     <string name="cat_notif_new">一隻新的貓來了。</string>
     <string name="cat_notif_return">一隻貓已經走了。</string>
-    <string name="cat_dialog_return_title">一隻貓走了。</string>
+    <string name="cat_dialog_return_title">一隻貓離開了。</string>
     <string name="cat_dialog_return_message">一隻已經出現過的貓又來了，嘗試用不同的食物來獲得新的貓。</string>
     <string name="current_dish">當前的: %s</string>
     <string name="cat_count">已發現的貓: %s</string>
