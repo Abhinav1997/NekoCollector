@@ -8,8 +8,6 @@
     <string name="about">關於</string>
     <string name="about_text">這是基於安卓牛軋糖的復活節彩蛋開發的，而且舊的安卓版本可以使用。</string>
     <string name="instructions_text">這個遊戲很簡單，點擊空盤來選擇食物，然後等待壹只貓聞到食物來找妳，收集盡可能許多獨特的貓!</string>
-    <string name="credits">製作者</string>
-    <string name="aosp" >安卓開源項目</string>
     <string name="not_again">不再顯示。</string>
     <string name="close_app_dialog_title">退出應用</string>
     <string name="close_app">你現在可以退出，貓很快會來找你。</string>

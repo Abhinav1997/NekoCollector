@@ -8,8 +8,6 @@
     <string name="about">关于</string>
     <string name="about_text">这是基于安卓牛轧糖的复活节彩蛋开发的，而且旧的安卓版本可用。</string>
     <string name="instructions_text">这个游戏很简单，点击空盘来选择食物，然后等待一只猫闻到食物来找你，收集尽可能许多独特的猫!</string>
-    <string name="credits">制作者</string>
-    <string name="aosp" >安卓开源项目</string>
     <string name="not_again">不再显示。</string>
     <string name="close_app_dialog_title">退出应用</string>
     <string name="close_app">你现在可以退出应用程序，猫很快就会来。</string>
