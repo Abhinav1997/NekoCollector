@@ -125,17 +125,10 @@ public class NekoService extends JobService {
 
         final JobInfo jobInfo;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            jobInfo = new JobInfo.Builder(JOB_ID,
-                    new ComponentName(context, NekoService.class))
-                    .setMinimumLatency(interval)
-                    .build();
-        } else {
-            jobInfo = new JobInfo.Builder(JOB_ID,
-                    new ComponentName(context, NekoService.class))
-                    .setPeriodic(interval)
-                    .build();
-        }
+        jobInfo = new JobInfo.Builder(JOB_ID,
+                new ComponentName(context, NekoService.class))
+                .setMinimumLatency(interval)
+                .build();
 
         Log.v(TAG, "A cat will visit in " + interval + "ms: " + String.valueOf(jobInfo));
         jss.schedule(jobInfo);

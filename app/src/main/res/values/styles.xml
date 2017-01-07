@@ -3,6 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="@style/Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/blue_grey_800</item>
+        <item name="colorPrimaryDark">@color/blue_grey_900</item>
+        <item name="android:windowBackground">@color/grey_900</item>
         <item name="windowActionBar">false</item>
     </style>
 

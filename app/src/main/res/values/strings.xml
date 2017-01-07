@@ -27,6 +27,7 @@ Copyright (C) 2016 The Android Open Source Project
     <string name="credits">Credits</string>
     <string name="aosp" translatable="false">Android Open Source Project</string>
     <string name="not_again">Don\'t show this again.</string>
+    <string name="close_app_dialog_title">Exit app</string>
     <string name="close_app">You can exit the app now. A cat will come soon.</string>
     <string name="add_cat">Cat added</string>
     <string name="remove_cat">Do you want to remove this cat?</string>

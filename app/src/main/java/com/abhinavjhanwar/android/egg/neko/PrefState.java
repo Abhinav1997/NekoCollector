@@ -32,6 +32,8 @@ class PrefState implements OnSharedPreferenceChangeListener {
 
     private static final String CHECKBOX_SHOW_STATE = "donotshow";
 
+    private static final String CHECKBOX_SHOW_STATE_FOOD = "donotshowfood";
+
     private static final String CAT_RETURN_STATE = "cat_returns";
 
     private static final String CAT_KEY_PREFIX = "cat:";
@@ -86,6 +88,14 @@ class PrefState implements OnSharedPreferenceChangeListener {
 
     public boolean getDoNotShow() {
         return mPrefs.getBoolean(CHECKBOX_SHOW_STATE, false);
+    }
+
+    public void setDoNotShowFood(boolean doNotShow) {
+        mPrefs.edit().putBoolean(CHECKBOX_SHOW_STATE_FOOD, doNotShow).apply();
+    }
+
+    public boolean getDoNotShowFood() {
+        return mPrefs.getBoolean(CHECKBOX_SHOW_STATE_FOOD, false);
     }
 
     public void setCatReturns(boolean catReturns) {
