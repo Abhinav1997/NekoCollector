@@ -6,6 +6,7 @@
     <string name="instructions_text">Игра очень проста. Чтобы выбрать корм, нажмите на пустую миску. Теперь ждите, когда кот почувствует запах и прибежит. Соберите столько уникальных котов, сколько сможете!</string>
     <string name="credits">Авторы</string>
     <string name="not_again">Не показывать это снова.</string>
+    <string name="close_app_dialog_title">Выход</string>
     <string name="close_app">Теперь вы можете закрыть приложение. Кот придёт чуть позже.</string>
     <string name="add_cat">Кот добавлен</string>
     <string name="remove_cat">Вы действительно хотите прогнать этого кота?</string>
@@ -15,4 +16,5 @@
     <string name="cat_dialog_return_title">Кот вернулся</string>
     <string name="cat_dialog_return_message">Похоже это вернулся Ваш кот. Пробуйте разные виды корма, чтобы приманить новых котов.</string>
     <string name="current_dish">Сейчас: %s</string>
+    <string name="cat_count">Найденные коты: %s</string>
 </resources>
