@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2016 The Android Open Source Project
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+    <string name="empty_dish">空盘子</string>
+    <string name="about">关于</string>
+    <string name="about_text">本应用定制于Android Nougat的彩蛋并适兼容老版本Android。</string>
+    <string name="instructions_text">游戏很简单。点击空盘子来选择一种食物，然后等待猫闻到食物来找你。尽可能多地收集独特的猫！</string>
+    <string name="credits">致谢</string>
+    <string name="not_again">不再显示。</string>
+    <string name="close_app_dialog_title">退出程序</string>
+    <string name="close_app">您现在可以退出程序。一只猫很快会来。</string>
+    <string name="add_cat">猫已添加</string>
+    <string name="remove_cat">您确定要移除这只猫？</string>
+    <string name="cat_notif_default">这里有一只猫。</string>
+    <string name="cat_notif_new">有一只新的猫。</string>
+    <string name="cat_notif_return">一只猫已经回来。</string>
+    <string name="cat_dialog_return_title">一只猫已回来</string>
+    <string name="cat_dialog_return_message">好像一只老的猫已经回来了。尝试不同的食物来得到独特的猫。</string>
+    <string name="current_dish">当前：%s</string>
+    <string name="cat_count">找到的猫：%s</string>
+</resources>
