@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Translated to Brazilian Portuguese by Caio Roberto - caiorrs -->
+
+<resources>
+    <string-array name="food_names">
+        <item>Prato vazio</item>
+        <item>Ração</item>
+        <item>Peixe</item>
+        <item>Galinha</item>
+        <item>Doce</item>
+    </string-array>
+</resources>
