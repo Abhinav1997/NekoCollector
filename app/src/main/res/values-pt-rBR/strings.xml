@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Translated to Brazilian Portuguese by Caio Roberto - caiorrs -->
+
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+    <string name="app_name" translatable="false">Neko Collector</string>
+    <string name="default_cat_name" translatable="false">Cat #%s</string>
+    <string name="directory_name" translatable="false">Cats</string>
+    <string name="empty_dish">Prato vazio</string>
+    <string name="about">Sobre</string>
+    <string name="about_text">Isto é baseado no Easter Egg do Android Nougat e feito disponível para versões mais antigas do android.</string>
+    <string name="instructions_text">O jogo é simples. Clique no prato vazio para selecionar uma comida. Agora espere até um gato sentir o cheiro da comida e venha até você. Colecione o máximo de gatos exclusivos que você puder!</string>
+    <string name="credits">Créditos</string>
+    <string name="aosp" translatable="false">Android Open Source Project</string>
+    <string name="not_again">Não mostrar isto novamente.</string>
+    <string name="close_app_dialog_title">Sair do app</string>
+    <string name="close_app">Você pode sair do app agora. Um gato virá em breve.</string>
+    <string name="add_cat">Gato adicionado</string>
+    <string name="remove_cat">Você quer remover este gato?</string>
+    <string name="cat_notif_default">Um gato está aqui.</string>
+    <string name="cat_notif_new">Um novo gato está aqui.</string>
+    <string name="cat_notif_return">Um gato retornou.</string>
+    <string name="cat_dialog_return_title">Um gato retornou</string>
+    <string name="cat_dialog_return_message">Parece que um antigo gato retornou. Tente comidas diferentes para conseguir gatos exclusivos.</string>
+    <string name="current_dish">Atual: %s</string>
+    <string name="cat_count">Gatos encontrados: %s</string>
+    <array name="food_icons">
+        <item>@drawable/food_dish</item>
+        <item>@drawable/food_bits</item>
+        <item>@drawable/food_sysuituna</item>
+        <item>@drawable/food_chicken</item>
+        <item>@drawable/food_donut</item>
+    </array>
+    <integer-array name="food_intervals">
+        <item>0</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>120</item>
+    </integer-array>
+    <integer-array name="food_new_cat_prob">
+        <item>0</item>
+        <item>30</item>
+        <item>50</item>
+        <item>70</item>
+        <item>90</item>
+    </integer-array>
+</resources>
